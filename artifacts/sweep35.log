@@ -1,0 +1,13 @@
+word=0.3748 char=0.3185 raw=0.3193 find=0.3514 imp=0.5573 fx=0.413 cRec=0.931 | {"use_impression_chooser": false, "chooser_depth": 1} [33s]
+word=0.3748 char=0.3185 raw=0.3193 find=0.3514 imp=0.5573 fx=0.413 cRec=0.931 | {"use_impression_chooser": false, "chooser_depth": 2} [23s]
+word=0.3748 char=0.3185 raw=0.3193 find=0.3514 imp=0.5573 fx=0.413 cRec=0.931 | {"use_impression_chooser": false, "chooser_depth": 3} [23s]
+word=0.3748 char=0.3185 raw=0.3193 find=0.3514 imp=0.5573 fx=0.413 cRec=0.931 | {"use_impression_chooser": true, "chooser_depth": 1} [29s]
+word=0.3788 char=0.3224 raw=0.3231 find=0.3514 imp=0.5442 fx=0.413 cRec=0.919 | {"use_impression_chooser": true, "chooser_depth": 2} [29s]
+word=0.3788 char=0.3224 raw=0.3231 find=0.3514 imp=0.5442 fx=0.413 cRec=0.919 | {"use_impression_chooser": true, "chooser_depth": 3} [29s]
+
+### TOP 5 ###
+  0.3748  {"use_impression_chooser": false, "chooser_depth": 1}
+  0.3748  {"use_impression_chooser": false, "chooser_depth": 2}
+  0.3748  {"use_impression_chooser": false, "chooser_depth": 3}
+  0.3748  {"use_impression_chooser": true, "chooser_depth": 1}
+  0.3788  {"use_impression_chooser": true, "chooser_depth": 2}

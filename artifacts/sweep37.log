@@ -1,0 +1,15 @@
+word=0.3765 char=0.3199 raw=0.3208 find=0.3538 imp=0.5572 fx=0.410 cRec=0.931 | {"use_bigrams": false, "mine_threshold": 0.4} [34s]
+word=0.3748 char=0.3185 raw=0.3193 find=0.3514 imp=0.5573 fx=0.413 cRec=0.931 | {"use_bigrams": false, "mine_threshold": 0.5} [22s]
+word=0.3742 char=0.3184 raw=0.3193 find=0.3506 imp=0.5574 fx=0.414 cRec=0.931 | {"use_bigrams": false, "mine_threshold": 0.6} [22s]
+word=0.3766 char=0.3204 raw=0.3212 find=0.3536 imp=0.5574 fx=0.413 cRec=0.931 | {"use_bigrams": false, "mine_threshold": 0.7} [22s]
+word=0.3755 char=0.3188 raw=0.3196 find=0.3527 imp=0.5578 fx=0.415 cRec=0.931 | {"use_bigrams": true, "mine_threshold": 0.4} [26s]
+word=0.3757 char=0.3190 raw=0.3198 find=0.3529 imp=0.5578 fx=0.415 cRec=0.932 | {"use_bigrams": true, "mine_threshold": 0.5} [25s]
+word=0.3757 char=0.3195 raw=0.3204 find=0.3529 imp=0.5578 fx=0.415 cRec=0.931 | {"use_bigrams": true, "mine_threshold": 0.6} [25s]
+word=0.3768 char=0.3202 raw=0.3211 find=0.3542 imp=0.5576 fx=0.416 cRec=0.931 | {"use_bigrams": true, "mine_threshold": 0.7} [24s]
+
+### TOP 5 ###
+  0.3742  {"use_bigrams": false, "mine_threshold": 0.6}
+  0.3748  {"use_bigrams": false, "mine_threshold": 0.5}
+  0.3755  {"use_bigrams": true, "mine_threshold": 0.4}
+  0.3757  {"use_bigrams": true, "mine_threshold": 0.6}
+  0.3757  {"use_bigrams": true, "mine_threshold": 0.5}

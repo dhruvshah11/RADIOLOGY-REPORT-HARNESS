@@ -301,3 +301,38 @@ def correct_spelling(text: str, vocab: dict[str, int], min_count: int = 3) -> st
         return out.capitalize() if w[:1].isupper() else out
 
     return _WORD_RE.sub(repl, text)
+
+
+# ------------------------------------------------------------- body regions
+# Coarse regions used to condition the mined routing statistics: the same word
+# means different fields in different studies ("effusion" -> PLEURA in a chest
+# radiograph, JOINT in a knee MRI).
+REGION_GROUPS: dict[str, tuple[str, ...]] = {
+    "chest": ("chest", "thorax", "lung", "rib", "ribs", "sternum", "clavicle", "breast",
+              "mediastinum"),
+    "abdomen": ("abdomen", "pelvis", "liver", "kidney", "bladder", "gallbladder", "spleen",
+                "pancreas", "bowel", "uterus", "ovary", "prostate", "scrotum", "renal"),
+    "spine": ("spine", "lsspine", "vertebra", "sacrum", "coccyx", "lumbar", "cervical",
+              "thoracic", "sacral", "spinal"),
+    "upper_limb": ("shoulder", "elbow", "wrist", "hand", "humerus", "forearm", "finger",
+                   "thumb", "scapula", "arm", "clavicular"),
+    "lower_limb": ("hip", "knee", "ankle", "foot", "femur", "leg", "heel", "toe", "tibia",
+                   "fibula", "calcaneous", "calcaneus", "patella"),
+    "head_neck": ("head", "brain", "skull", "orbit", "sinus", "neck", "face", "sella",
+                  "pituitary", "temporal", "mastoid", "paranasal", "thyroid"),
+}
+
+_REGION_INDEX = {w: r for r, words in REGION_GROUPS.items() for w in words}
+
+
+def body_region(body_part: str, study_description: str = "") -> str:
+    """Coarse anatomical region for conditioning the routing statistics."""
+    text = re.sub(r"[^a-z ]", " ", f"{body_part} {study_description}".lower())
+    for w in text.split():
+        r = _REGION_INDEX.get(w)
+        if r:
+            return r
+        r = _REGION_INDEX.get(w.rstrip("s"))
+        if r:
+            return r
+    return "other"

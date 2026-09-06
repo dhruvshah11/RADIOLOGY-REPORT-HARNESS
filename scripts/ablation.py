@@ -41,6 +41,12 @@ ABLATIONS = [
     ("+ summary starts after last cue (rejected)", {"summary_after_cues": True}),
     ("+ merge unrouted findings into one para", {"merge_extras": True}),
     ("- abnormality gate on the impression", {"findings_require_abnormal": False}),
+    ("- stricter mining threshold", {"mine_threshold": 0.5}),
+    ("+ body-region-conditioned statistics (rejected)", {"region_weight": 0.5}),
+    ("+ bigram routing features (rejected)", {"use_bigrams": True}),
+    ("+ conjunction splitting (rejected)", {"allow_conjunction_split": True}),
+    ("+ trim detail in dictated summary (rejected)", {"trim_summary_detail": True}),
+    ("+ cost-sensitive impression chooser (no change)", {"use_impression_chooser": True}),
 ]
 
 

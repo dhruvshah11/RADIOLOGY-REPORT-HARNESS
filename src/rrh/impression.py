@@ -103,7 +103,7 @@ def build_impression(
     ]
 
     if dictated_summary:
-        items = [condense(x) for x in dictated_summary]
+        items = [condense(x, trim_detail=cfg.trim_summary_detail) for x in dictated_summary]
         cap = cfg.summary_cap
     else:
         source = findings

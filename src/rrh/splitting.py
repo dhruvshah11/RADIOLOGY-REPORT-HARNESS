@@ -92,10 +92,27 @@ def split_clauses(text: str) -> list[str] | None:
     return [p + "." for p in parts]
 
 
-def candidate_splits(text: str) -> list[list[str]]:
+_AND_SPLIT = re.compile(r"\s+and\s+|\s*;\s*", re.I)
+
+
+def split_conjunction(text: str) -> list[str] | None:
+    """Telegraphic coordination: "degenerative changes and small effusion"."""
+    t = squash(text).rstrip(".")
+    if re.search(r"\b(no|not|without|with|between|causing|producing)\b", t, re.I):
+        return None
+    parts = [p.strip(" .") for p in _AND_SPLIT.split(t) if p.strip(" .")]
+    if not _ok_parts(parts):
+        return None
+    return [p + "." for p in parts]
+
+
+def candidate_splits(text: str, conjunction: bool = False) -> list[list[str]]:
     """Alternative decompositions of `text`, best first."""
     out: list[list[str]] = []
-    for fn in (split_negation, split_subject_list, split_clauses):
+    fns = [split_negation, split_subject_list, split_clauses]
+    if conjunction:
+        fns.append(split_conjunction)
+    for fn in fns:
         parts = fn(text)
         if parts and len(parts) >= 2:
             out.append([squash(p) for p in parts])

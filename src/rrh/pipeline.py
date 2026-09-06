@@ -14,7 +14,7 @@ from .routing import (RoutingModel, build_context, cue_supported, field_candidat
                       fit_ranked_router, score_segment)
 from .splitting import candidate_splits
 from .template import parse_template, render_report, resolve_placeholders
-from .lexicon import stem
+from .lexicon import body_region, stem
 from .textutil import content_tokens, squash
 
 
@@ -34,6 +34,11 @@ class Config:
     w_continuity: float = 0.0
     w_backward: float = 0.0
     w_prior: float = 0.0
+    region_weight: float = 0.0
+    use_impression_chooser: bool = False
+    chooser_depth: int = 2
+    use_bigrams: bool = False
+    mine_threshold: float = 0.5
     viterbi: bool = False
     use_ranker: bool = False
     ranker_epochs: int = 300
@@ -63,6 +68,8 @@ class Config:
     number_impression: bool = True
     drop_negative_impression: bool = True
     trim_detail: bool = True
+    trim_summary_detail: bool = False
+    allow_conjunction_split: bool = False
     findings_require_abnormal: bool = True
     no_abnormal_fallback: str = "template"  # template | negatives
     rank_impression_by_severity: bool = False
@@ -78,6 +85,8 @@ class Config:
 MODEL_KEYS = (
     "normalize_shorthand", "correct_spelling", "summary_threshold", "summary_max_misses",
     "use_ranker", "ranker_epochs", "ranker_lr", "ranker_l2", "summary_after_cues",
+    "region_weight", "use_impression_chooser", "chooser_depth", "use_bigrams",
+    "mine_threshold",
 )
 
 
@@ -167,7 +176,7 @@ class ReportGenerator:
         whole = [(text, label, score)]
         if not self.cfg.allow_splitting:
             return whole
-        for parts in candidate_splits(text):
+        for parts in candidate_splits(text, self.cfg.allow_conjunction_split):
             routed = [self._route_one(p, cue, tmpl, ctx, prev_order) for p in parts]
             labels = [lab for lab, _ in routed]
             if any(lab is None for lab in labels):
@@ -243,10 +252,15 @@ class ReportGenerator:
         return max(best.values(), key=lambda x: x[0])[1]
 
     # ------------------------------------------------------------- generate
-    def generate(self, row: dict) -> tuple[str, Trace]:
+    def generate(self, row: dict, force_impression: str | None = None) -> tuple[str, Trace]:
         cfg = self.cfg
         tmpl = parse_template(row["template_content"])
-        ctx = build_context(tmpl)
+        ctx = build_context(
+            tmpl,
+            body_region(
+                str(row.get("body_part") or ""), str(row.get("study_description") or "")
+            ),
+        )
         doc = segment_dictation(
             row.get("dictation") or "",
             normalize=cfg.normalize_shorthand,
@@ -309,8 +323,30 @@ class ReportGenerator:
             body = edit_field(f.text, routed.get(f.label, []), cfg)
             field_texts.append((f.label, resolve_placeholders(body, laterality, region)))
 
+        summary_items = [s.text for s in doc.impression]
+        if force_impression is not None:
+            if force_impression == "findings":
+                summary_items = []
+            elif force_impression == "template":
+                summary_items, ordered_findings = [], []
+        elif cfg.use_impression_chooser and self.model.chooser is not None:
+            from .chooser import features as chooser_features
+            from .impression import is_abnormal
+
+            pick = self.model.chooser.choose(
+                chooser_features(
+                    summary_items,
+                    ordered_findings,
+                    [x for x in ordered_findings if is_abnormal(x)],
+                    tmpl.impression,
+                )
+            )
+            if pick == "findings":
+                summary_items = []
+            elif pick == "template":
+                summary_items, ordered_findings = [], []
         impression = build_impression(
-            [s.text for s in doc.impression],
+            summary_items,
             ordered_findings,
             tmpl.impression,
             laterality,

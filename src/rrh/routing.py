@@ -17,9 +17,11 @@ import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field as dc_field
 
-from .lexicon import concept_for_label, concept_hits, stem
+from .lexicon import body_region, concept_for_label, concept_hits, stem
 from .template import Template, parse_template
 from .textutil import content_tokens, key, sim, split_sentences, squash
+
+MINE_THRESHOLD = 0.5
 
 LEVEL_RE = re.compile(r"^([ctls])\s*(\d{1,2})\s*[-/]\s*(?:([ctls])\s*)?(\d{1,2}|s1)$", re.I)
 
@@ -77,6 +79,69 @@ def _label_match(text: str, label: str, weights: dict[str, float] | None = None)
 
 
 @dataclass
+class RegionStats:
+    """Mined (token -> field) statistics for one coarse body region."""
+
+    token_label: dict[str, Counter] = dc_field(default_factory=lambda: defaultdict(Counter))
+    label_total: Counter = dc_field(default_factory=Counter)
+    token_total: Counter = dc_field(default_factory=Counter)
+    n_pairs: int = 0
+    postings: dict[str, list[int]] = dc_field(default_factory=lambda: defaultdict(list))
+    examples: list[tuple[frozenset, str]] = dc_field(default_factory=list)
+
+    def add(self, toks: set[str], label: str) -> None:
+        self.n_pairs += 1
+        self.label_total[label] += 1
+        idx = len(self.examples)
+        self.examples.append((frozenset(toks), label))
+        for t in sorted(toks):
+            self.token_label[t][label] += 1
+            self.token_total[t] += 1
+            self.postings[t].append(idx)
+
+    def score(self, tokens: set[str], label: str) -> float:
+        if label not in self.label_total or not tokens:
+            return 0.0
+        total = self.label_total[label]
+        acc = 0.0
+        for t in sorted(tokens):
+            c = self.token_label.get(t)
+            if not c:
+                continue
+            p_t_l = c.get(label, 0) / total
+            p_t = self.token_total[t] / max(1, self.n_pairs)
+            if p_t_l > 0:
+                acc += math.log((p_t_l + 1e-4) / (p_t + 1e-4))
+        return max(0.0, min(1.0, acc / (2.0 * max(1, len(tokens)))))
+
+    def knn(self, tokens: set[str], allowed: set[str], k: int = 12) -> dict[str, float]:
+        if not tokens or not self.examples:
+            return {}
+        cand: Counter = Counter()
+        for t in sorted(tokens):
+            for i in self.postings.get(t, ()):  # type: ignore[arg-type]
+                cand[i] += 1
+        if not cand:
+            return {}
+        scored = []
+        for i, _ in sorted(cand.items(), key=lambda kv: (-kv[1], kv[0]))[:120]:
+            etoks, label = self.examples[i]
+            if label not in allowed:
+                continue
+            inter = len(tokens & etoks)
+            if not inter:
+                continue
+            scored.append((inter / len(tokens | etoks), label))
+        scored.sort(reverse=True)
+        votes: dict[str, float] = {}
+        tot = 0.0
+        for j, label in sorted(scored[:k]):
+            votes[label] = votes.get(label, 0.0) + j
+            tot += j
+        return {lab: v / tot for lab, v in votes.items()} if tot > 0 else {}
+
+
+@dataclass
 class RoutingModel:
     token_label: dict[str, Counter] = dc_field(default_factory=lambda: defaultdict(Counter))
     label_total: Counter = dc_field(default_factory=Counter)
@@ -87,6 +152,11 @@ class RoutingModel:
     examples: list[tuple[frozenset, str]] = dc_field(default_factory=list)
     vocab: dict[str, int] = dc_field(default_factory=dict)
     ranker: object | None = None
+    chooser: object | None = None
+    regions: dict[str, RegionStats] = dc_field(default_factory=dict)
+    use_bigrams: bool = False
+    mine_threshold: float = MINE_THRESHOLD
+    region_weight: float = 0.0
     field_edits: dict[tuple[str, str], tuple[int, int]] = dc_field(default_factory=dict)
     label_edits: dict[str, tuple[int, int]] = dc_field(default_factory=dict)
     global_edit_rate: float = 0.35
@@ -177,7 +247,7 @@ class RoutingModel:
         return max(0.0, min(1.0, acc / (2.0 * max(1, len(tokens)))))
 
 
-def mine_row(row) -> list[tuple[int, str, str, str]]:
+def mine_row(row, threshold: float = MINE_THRESHOLD) -> list[tuple[int, str, str, str]]:
     """(segment index, segment text, gold field label, reference sentence)."""
     from .dictation import segment_dictation
 
@@ -203,7 +273,7 @@ def mine_row(row) -> list[tuple[int, str, str, str]]:
                 s = sim(rs, u.text)
                 if s > best_s:
                     best, best_s = i, s
-            if best >= 0 and best_s >= 0.5 and best not in used:
+            if best >= 0 and best_s >= threshold and best not in used:
                 used.add(best)
                 out.append((best, units[best].text, rf.label, rs))
     return out
@@ -214,10 +284,26 @@ def mine_pairs(rows) -> list[tuple[str, str]]:
     return [(text, label) for row in rows for _, text, label, _ in mine_row(row)]
 
 
+def token_repr(text: str, bigrams: bool = False) -> set[str]:
+    """Stemmed unigrams, optionally with adjacent-pair features.
+
+    Bigrams disambiguate terms whose field depends on their neighbour
+    ("joint effusion" vs "pleural effusion").
+    """
+    toks = [stem(t) for t in content_tokens(text)]
+    out = set(toks)
+    if bigrams:
+        out |= {f"{a}_{b}" for a, b in zip(toks, toks[1:])}
+    return out
+
+
 def fit_router(rows, cfg=None) -> RoutingModel:
     from .lexicon import build_vocabulary
 
     model = RoutingModel()
+    if cfg is not None:
+        model.use_bigrams = getattr(cfg, "use_bigrams", False)
+        model.mine_threshold = getattr(cfg, "mine_threshold", MINE_THRESHOLD)
     model.vocab = build_vocabulary(
         [r.get("report") or "" for r in rows] + [r.get("template_content") or "" for r in rows]
     )
@@ -244,9 +330,15 @@ def fit_router(rows, cfg=None) -> RoutingModel:
 
     pairs: list[tuple[str, str]] = []
     for row in rows:
-        for _, text, label, ref_sentence in mine_row(row):
+        region = body_region(
+            str(row.get("body_part") or ""), str(row.get("study_description") or "")
+        )
+        for _, text, label, ref_sentence in mine_row(row, model.mine_threshold):
             pairs.append((text, label))
-            toks = frozenset(stem(t) for t in content_tokens(text))
+            rtoks = token_repr(text, model.use_bigrams)
+            if rtoks:
+                model.regions.setdefault(region, RegionStats()).add(rtoks, label)
+            toks = frozenset(token_repr(text, model.use_bigrams))
             if not toks:
                 continue
             idx = len(model.style_examples)
@@ -254,7 +346,7 @@ def fit_router(rows, cfg=None) -> RoutingModel:
             for t in toks:
                 model.style_postings[t].append(idx)
     for text, label in pairs:
-        toks = {stem(t) for t in content_tokens(text)}
+        toks = token_repr(text, model.use_bigrams)
         if not toks:
             continue
         model.n_pairs += 1
@@ -327,11 +419,22 @@ def field_features(seg_text: str, cue: str | None, tmpl: Template, model: Routin
     the two are directly comparable.
     """
     idf, lw = ctx.idf, ctx.label_weights
-    toks = {stem(t) for t in content_tokens(seg_text)}
+    toks = token_repr(seg_text, model.use_bigrams)
     hits = concept_hits(seg_text)
     tot_hits = sum(hits.values())
     cands = field_candidates(tmpl)
-    knn = model.knn(toks, {f.label for f in cands})
+    allowed = {f.label for f in cands}
+    knn = model.knn(toks, allowed)
+    reg = model.regions.get(ctx.region) if model.region_weight else None
+    if reg is not None and reg.n_pairs >= 50:
+        lam = model.region_weight
+        reg_knn = reg.knn(toks, allowed)
+        knn = {
+            lab: (1 - lam) * knn.get(lab, 0.0) + lam * reg_knn.get(lab, 0.0)
+            for lab in allowed
+        }
+    else:
+        reg = None
     span = max(1, len(tmpl.fields) - 1)
     out: list[tuple[str, dict[str, float]]] = []
     for f in cands:
@@ -349,6 +452,9 @@ def field_features(seg_text: str, cue: str | None, tmpl: Template, model: Routin
                 den = sum(idf.get(t, 1.0) for t in sorted(ft)) or 1.0
                 feat["template"] = min(1.0, num / den)
         feat["mined"] = model.score(toks, f.label)
+        if reg is not None:
+            lam = model.region_weight
+            feat["mined"] = (1 - lam) * feat["mined"] + lam * reg.score(toks, f.label)
         feat["knn"] = knn.get(f.label, 0.0)
         feat["group"] = 1.0 if f.is_group else 0.0
         feat["prior"] = model.edit_prior(ctx.template_key, f.label)
@@ -401,9 +507,10 @@ class TemplateContext:
     idf: dict[str, float]
     label_weights: dict[str, float]
     template_key: str = ""
+    region: str = "other"
 
 
-def build_context(tmpl: Template) -> TemplateContext:
+def build_context(tmpl: Template, region: str = "other") -> TemplateContext:
     """Rarity weights computed over the template's own fields and labels:
     a word that occurs in only one field/label is decisive for that field."""
     fields = field_candidates(tmpl)
@@ -424,7 +531,9 @@ def build_context(tmpl: Template) -> TemplateContext:
         for t in list(lw):
             if t.startswith(generic):
                 lw[t] = min(lw[t], 0.3)
-    return TemplateContext(idf=idf, label_weights=lw, template_key=template_key(tmpl.raw))
+    return TemplateContext(
+        idf=idf, label_weights=lw, template_key=template_key(tmpl.raw), region=region
+    )
 
 
 # backwards-compatible helper
@@ -436,7 +545,14 @@ def fit_ranked_router(rows, cfg) -> RoutingModel:
     """Fit the mined statistics, then fit the learned router on top of them."""
     from .ranker import build_examples, fit_ranker
 
-    model = fit_router(rows)
+    model = fit_router(rows, cfg)
+    model.region_weight = getattr(cfg, "region_weight", 0.0)
+    if getattr(cfg, "use_impression_chooser", False):
+        from .chooser import build_training_rows, fit_chooser
+
+        model.chooser = fit_chooser(
+            build_training_rows(rows, model, cfg), depth=cfg.chooser_depth
+        )
     if getattr(cfg, "use_ranker", False):
         model.ranker = fit_ranker(
             build_examples(rows, model, cfg),

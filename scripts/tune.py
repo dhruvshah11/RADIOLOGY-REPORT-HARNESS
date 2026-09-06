@@ -49,6 +49,12 @@ GRID = {
     "append_template_impression": [True, False],
     "blank_between_fields": [True, False],
     "cue_match_min": [0.25, 0.34, 0.45],
+    "mine_threshold": [0.5, 0.55, 0.6, 0.65],
+    "impression_dedupe": [0.7, 0.82, 0.9, 0.95],
+    "findings_require_abnormal": [True, False],
+    "drop_negative_impression": [True, False],
+    "w_prior": [0.0, 0.4],
+    "region_weight": [0.0, 0.2],
 }
 
 
