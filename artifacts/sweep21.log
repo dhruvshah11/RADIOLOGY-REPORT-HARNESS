@@ -1,0 +1,4 @@
+word=0.3915 char=0.3321 raw=0.3330 find=0.3621 imp=0.6046 fx=0.411 cRec=0.921 | {"dedupe_threshold": 0.7} [13s]
+
+### TOP 5 ###
+  0.3915  {"dedupe_threshold": 0.7}

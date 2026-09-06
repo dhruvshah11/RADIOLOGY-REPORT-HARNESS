@@ -1,0 +1,22 @@
+word=0.3933 char=0.3344 raw=0.3352 find=0.3639 imp=0.6008 fx=0.407 cRec=0.925 | {"summary_threshold": 0.26, "summary_max_misses": 2} [11s]
+word=0.3929 char=0.3341 raw=0.3349 find=0.3636 imp=0.6025 fx=0.409 cRec=0.924 | {"summary_threshold": 0.26, "summary_max_misses": 3} [11s]
+word=0.3962 char=0.3367 raw=0.3375 find=0.3660 imp=0.6241 fx=0.408 cRec=0.921 | {"summary_threshold": 0.26, "summary_max_misses": 5} [11s]
+word=0.3939 char=0.3351 raw=0.3358 find=0.3659 imp=0.6006 fx=0.406 cRec=0.926 | {"summary_threshold": 0.3, "summary_max_misses": 2} [11s]
+word=0.3930 char=0.3341 raw=0.3349 find=0.3643 imp=0.6018 fx=0.407 cRec=0.925 | {"summary_threshold": 0.3, "summary_max_misses": 3} [11s]
+word=0.3944 char=0.3352 raw=0.3360 find=0.3650 imp=0.6165 fx=0.406 cRec=0.923 | {"summary_threshold": 0.3, "summary_max_misses": 5} [11s]
+word=0.3999 char=0.3402 raw=0.3410 find=0.3713 imp=0.6150 fx=0.405 cRec=0.927 | {"summary_threshold": 0.34, "summary_max_misses": 2} [11s]
+word=0.3974 char=0.3381 raw=0.3389 find=0.3685 imp=0.6101 fx=0.406 cRec=0.926 | {"summary_threshold": 0.34, "summary_max_misses": 3} [11s]
+word=0.3978 char=0.3383 raw=0.3392 find=0.3681 imp=0.6191 fx=0.406 cRec=0.925 | {"summary_threshold": 0.34, "summary_max_misses": 5} [11s]
+word=0.4026 char=0.3427 raw=0.3435 find=0.3747 imp=0.6175 fx=0.405 cRec=0.927 | {"summary_threshold": 0.4, "summary_max_misses": 2} [11s]
+word=0.4001 char=0.3406 raw=0.3414 find=0.3713 imp=0.6132 fx=0.406 cRec=0.926 | {"summary_threshold": 0.4, "summary_max_misses": 3} [11s]
+word=0.3999 char=0.3404 raw=0.3413 find=0.3706 imp=0.6206 fx=0.405 cRec=0.925 | {"summary_threshold": 0.4, "summary_max_misses": 5} [11s]
+word=0.4131 char=0.3517 raw=0.3526 find=0.3865 imp=0.6387 fx=0.403 cRec=0.927 | {"summary_threshold": 0.46, "summary_max_misses": 2} [12s]
+word=0.4079 char=0.3473 raw=0.3481 find=0.3800 imp=0.6306 fx=0.404 cRec=0.927 | {"summary_threshold": 0.46, "summary_max_misses": 3} [12s]
+word=0.4066 char=0.3462 raw=0.3471 find=0.3777 imp=0.6321 fx=0.404 cRec=0.926 | {"summary_threshold": 0.46, "summary_max_misses": 5} [12s]
+
+### TOP 5 ###
+  0.3929  {"summary_threshold": 0.26, "summary_max_misses": 3}
+  0.3930  {"summary_threshold": 0.3, "summary_max_misses": 3}
+  0.3933  {"summary_threshold": 0.26, "summary_max_misses": 2}
+  0.3939  {"summary_threshold": 0.3, "summary_max_misses": 2}
+  0.3944  {"summary_threshold": 0.3, "summary_max_misses": 5}

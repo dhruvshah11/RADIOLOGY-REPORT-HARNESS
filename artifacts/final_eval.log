@@ -1,0 +1,1 @@
+structured pipeline                n=636  RES_word=0.3908  RES_char=0.3317  RES_raw=0.3325  find=0.3612  imp=0.6045  labelF1=0.9958  fieldExact=0.4116  fieldRES=0.3726  cRec=0.921  cPrec=0.920

@@ -1,0 +1,10 @@
+word=0.4406 char=0.3706 raw=0.3715 find=0.4208 imp=0.6323 fx=0.388 cRec=0.922 | {"normalize_shorthand": true, "add_copula": true} [10s]
+word=0.4197 char=0.3558 raw=0.3567 find=0.3919 imp=0.6323 fx=0.392 cRec=0.922 | {"normalize_shorthand": true, "add_copula": false} [8s]
+word=0.4453 char=0.3735 raw=0.3744 find=0.4242 imp=0.6414 fx=0.387 cRec=0.917 | {"normalize_shorthand": false, "add_copula": true} [9s]
+word=0.4247 char=0.3591 raw=0.3600 find=0.3957 imp=0.6414 fx=0.391 cRec=0.917 | {"normalize_shorthand": false, "add_copula": false} [9s]
+
+### TOP 5 ###
+  0.4197  {"normalize_shorthand": true, "add_copula": false}
+  0.4247  {"normalize_shorthand": false, "add_copula": false}
+  0.4406  {"normalize_shorthand": true, "add_copula": true}
+  0.4453  {"normalize_shorthand": false, "add_copula": true}

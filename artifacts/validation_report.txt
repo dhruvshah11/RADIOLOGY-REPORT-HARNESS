@@ -1,0 +1,13 @@
+09293ce5-df84-44b4-9882-b8cddd1a1ac1	omission	dictated finding not represented: No acute osseous abnormality.
+12868962-9d03-46f0-8386-538365e5f561	omission	dictated finding not represented: No gross focal abnormality is identified in the visualized posterior e
+12868962-9d03-46f0-8386-538365e5f561	omission	dictated finding not represented: Prevertebral soft tissues are unremarkable.
+1c30fb15-29cc-4bad-a901-0a65cd45693b	omission	dictated finding not represented: No focal pancreatic mass or other definite abnormality identified.
+264a47c5-2b2e-44c6-a38a-bcf692ab5c0e	omission	dictated finding not represented: The airway appears normal.
+264a47c5-2b2e-44c6-a38a-bcf692ab5c0e	omission	dictated finding not represented: The visualized lung apices are clear.
+264a47c5-2b2e-44c6-a38a-bcf692ab5c0e	omission	dictated finding not represented: No loosening or complication evident.
+2a3448ce-7802-465b-8137-e7e0baefa477	omission	dictated finding not represented: No discrete rim-enhancing fluid collection or drainable abscess identi
+3ac0bcca-274c-4354-a235-203868739ca9	omission	dictated finding not represented: Visualized sacroiliac joints are maintained.
+42270507-c160-415a-a4d7-0e5b662bc62f	omission	dictated finding not represented: No associated periosteal reaction or acute osseous abnormality is iden
+42270507-c160-415a-a4d7-0e5b662bc62f	omission	dictated finding not represented: Visualized surrounding musculature is otherwise preserved.
+42270507-c160-415a-a4d7-0e5b662bc62f	omission	dictated finding not represented: No significant adjacent soft-tissue edema or fluid collection.
+cae63587-9491-47ca-8aaf-d4166a856ffe	omission	dictated finding not represented: No acute calvarial abnormality.

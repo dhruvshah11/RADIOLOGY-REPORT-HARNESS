@@ -1,0 +1,22 @@
+word=0.4176 char=0.3563 raw=0.3572 find=0.3891 imp=0.6077 fx=0.392 cRec=0.919 | {"summary_cap": 4, "findings_cap": 1} [10s]
+word=0.4186 char=0.3559 raw=0.3568 find=0.3891 imp=0.6266 fx=0.392 cRec=0.919 | {"summary_cap": 4, "findings_cap": 2} [9s]
+word=0.4228 char=0.3586 raw=0.3595 find=0.3891 imp=0.6591 fx=0.392 cRec=0.919 | {"summary_cap": 4, "findings_cap": 3} [9s]
+word=0.4156 char=0.3540 raw=0.3550 find=0.3891 imp=0.6035 fx=0.392 cRec=0.921 | {"summary_cap": 5, "findings_cap": 1} [9s]
+word=0.4166 char=0.3537 raw=0.3546 find=0.3891 imp=0.6224 fx=0.392 cRec=0.921 | {"summary_cap": 5, "findings_cap": 2} [9s]
+word=0.4208 char=0.3563 raw=0.3573 find=0.3891 imp=0.6549 fx=0.392 cRec=0.921 | {"summary_cap": 5, "findings_cap": 3} [9s]
+word=0.4144 char=0.3527 raw=0.3537 find=0.3891 imp=0.6037 fx=0.392 cRec=0.922 | {"summary_cap": 6, "findings_cap": 1} [9s]
+word=0.4154 char=0.3523 raw=0.3533 find=0.3891 imp=0.6226 fx=0.392 cRec=0.922 | {"summary_cap": 6, "findings_cap": 2} [9s]
+word=0.4196 char=0.3550 raw=0.3559 find=0.3891 imp=0.6551 fx=0.392 cRec=0.922 | {"summary_cap": 6, "findings_cap": 3} [9s]
+word=0.4129 char=0.3512 raw=0.3522 find=0.3891 imp=0.6037 fx=0.392 cRec=0.923 | {"summary_cap": 8, "findings_cap": 1} [9s]
+word=0.4139 char=0.3508 raw=0.3518 find=0.3891 imp=0.6226 fx=0.392 cRec=0.923 | {"summary_cap": 8, "findings_cap": 2} [9s]
+word=0.4182 char=0.3535 raw=0.3545 find=0.3891 imp=0.6551 fx=0.392 cRec=0.923 | {"summary_cap": 8, "findings_cap": 3} [9s]
+word=0.4123 char=0.3505 raw=0.3515 find=0.3891 imp=0.6089 fx=0.392 cRec=0.923 | {"summary_cap": 0, "findings_cap": 1} [10s]
+word=0.4133 char=0.3501 raw=0.3511 find=0.3891 imp=0.6278 fx=0.392 cRec=0.923 | {"summary_cap": 0, "findings_cap": 2} [10s]
+word=0.4175 char=0.3528 raw=0.3538 find=0.3891 imp=0.6603 fx=0.392 cRec=0.923 | {"summary_cap": 0, "findings_cap": 3} [10s]
+
+### TOP 5 ###
+  0.4123  {"summary_cap": 0, "findings_cap": 1}
+  0.4129  {"summary_cap": 8, "findings_cap": 1}
+  0.4133  {"summary_cap": 0, "findings_cap": 2}
+  0.4139  {"summary_cap": 8, "findings_cap": 2}
+  0.4144  {"summary_cap": 6, "findings_cap": 1}

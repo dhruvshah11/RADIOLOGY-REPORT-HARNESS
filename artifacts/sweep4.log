@@ -1,0 +1,13 @@
+word=0.4190 char=0.3552 raw=0.3564 find=0.3949 imp=0.6221 fx=0.394 cRec=0.922 | {"cue_veto": true, "min_route_score": 0.45} [10s]
+word=0.4196 char=0.3557 raw=0.3568 find=0.3960 imp=0.6221 fx=0.395 cRec=0.922 | {"cue_veto": true, "min_route_score": 0.8} [8s]
+word=0.4208 char=0.3568 raw=0.3580 find=0.3984 imp=0.6221 fx=0.398 cRec=0.922 | {"cue_veto": true, "min_route_score": 1.2} [9s]
+word=0.4157 char=0.3527 raw=0.3537 find=0.3894 imp=0.6221 fx=0.394 cRec=0.922 | {"cue_veto": false, "min_route_score": 0.45} [9s]
+word=0.4161 char=0.3530 raw=0.3540 find=0.3902 imp=0.6221 fx=0.394 cRec=0.922 | {"cue_veto": false, "min_route_score": 0.8} [9s]
+word=0.4168 char=0.3536 raw=0.3547 find=0.3921 imp=0.6221 fx=0.398 cRec=0.922 | {"cue_veto": false, "min_route_score": 1.2} [9s]
+
+### TOP 5 ###
+  0.4157  {"cue_veto": false, "min_route_score": 0.45}
+  0.4161  {"cue_veto": false, "min_route_score": 0.8}
+  0.4168  {"cue_veto": false, "min_route_score": 1.2}
+  0.4190  {"cue_veto": true, "min_route_score": 0.45}
+  0.4196  {"cue_veto": true, "min_route_score": 0.8}
