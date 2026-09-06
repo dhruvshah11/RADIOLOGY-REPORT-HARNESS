@@ -8,3 +8,6 @@ data/*.csv
 # Build artifacts
 artifacts/fold_models*.pkl
 artifacts/sweep_last.json
+
+# Stage-2 work packets embed the competition dictations/templates (not redistributed)
+artifacts/llm_packet*.json

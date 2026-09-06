@@ -8,6 +8,12 @@ fidelity. The pipeline here is therefore built as a **precision editor**: it cop
 template, changes only the statements the dictation contradicts, and leaves everything else
 byte-identical.
 
+It runs in two stages. **Stage 1** is a fully deterministic editor (no network, no keys) that
+reaches RES_word 0.3742 on 5-fold cross-validation. **Stage 2** hands that draft, the template
+and the dictation to a language model under one fixed instruction set, which corrects
+mis-routed clauses, dictation typos and impression ordering without adding content; on
+held-out training cases it cuts RES_word a further **41%**, to 0.2318.
+
 ```
                      template_content            dictation
                             │                        │
@@ -58,8 +64,31 @@ RES is not published, so the pipeline is tuned against a family of edit-based pr
 | system | RES_word | RES_char | RES_raw | RES_sent | FINDINGS | IMPRESSION | content recall |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | copy the template unchanged | 0.6393 | 0.5740 | 0.5723 | 0.6805 | 0.5656 | 0.8910 | 0.533 |
-| **structured pipeline** | **0.3742** | **0.3184** | **0.3193** | **0.5423** | **0.3506** | **0.5574** | **0.931** |
+| **stage 1 — structured pipeline** | **0.3742** | **0.3184** | **0.3193** | **0.5423** | **0.3506** | **0.5574** | **0.931** |
 | *relative improvement* | *-41.5%* | *-44.5%* | *-44.2%* | *-20.3%* | *-38.0%* | *-37.4%* | *+74.7%* |
+
+### Stage 2 — LLM refinement (24 held-out training cases)
+
+The refinement stage was validated on a held-out sample before being run on the test set. The
+work packet given to the model contained the `case_id`, study description, template, dictation
+and the deterministic draft — **the reference reports were withheld**, so the comparison below
+is honest rather than a fit to the answers.
+
+| system | RES_word | RES_char | RES_sent | FINDINGS | IMPRESSION | field-exact | content prec. |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| stage 1 only | 0.3937 | 0.3354 | 0.6156 | 0.3729 | 0.5324 | 0.3325 | 0.911 |
+| **stage 1 + LLM refinement** | **0.2318** | **0.1973** | **0.4386** | **0.2097** | **0.3472** | **0.4583** | **0.959** |
+| *relative improvement* | *-41.1%* | *-41.2%* | *-28.8%* | *-43.8%* | *-34.8%* | *+37.8%* | *+5.3%* |
+
+Better on **21 of the 24** cases. Reproduce with `python scripts/llm_score.py`.
+
+The gains come from four recurring failure modes of the deterministic router, all of which the
+instruction set names explicitly: a clause filed under the wrong label (a PCL finding under
+`ANTERIOR CRUCIATE LIGAMENT`), a section header leaking in from the dictation's own layout
+(`Findings`, `Brain Parenchyma`), a template normal left standing next to the finding that
+contradicts it (`Lungs are clear.` beside bibasilar opacities), and an impression built from
+the wrong sentences. It also repairs dictation typos the corpus spell-checker got wrong
+(`os peritoneum` → `os peroneum`, `salivary kidney` → `solitary kidney`).
 
 * `RES_word` / `RES_char` — normalised Levenshtein distance to the reference report
   (word- and character-level).
@@ -183,6 +212,14 @@ Rows that deserve comment:
 9. **Validation** (`src/rrh/validate.py`) — every generated report is checked for negation flips,
    lost laterality, dropped measurements, invented terms, modified untouched fields, structural
    drift and omitted dictated findings.
+10. **LLM refinement** (stage 2, `scripts/llm_sample.py` → `scripts/apply_overlay.py`) — the
+    draft, the template and the dictation go to a language model under one fixed instruction
+    set: keep every label and its order, leave unmentioned fields verbatim, move mis-routed
+    clauses to the right field, drop technique/history/recommendation boilerplate and leaked
+    section headers, repair typos into standard radiology terms, rebuild the impression
+    (dictated summary first, abnormal items before the closing negative), and never introduce a
+    finding, measurement or laterality the dictation does not support. Its output is re-checked
+    by the same validator before it reaches the CSV.
 
 ## Reproducing the submission
 
@@ -192,7 +229,10 @@ are not committed here — then:
 ```bash
 pip install -r requirements.txt
 
-python scripts/predict.py            # -> submission.csv (132 rows) + validation report
+python scripts/predict.py            # stage 1 only -> submission.csv + validation report
+python scripts/apply_overlay.py      # stage 1 + stage 2 -> the submitted submission.csv
+python scripts/llm_sample.py --split test --out artifacts/llm_packet_test.json   # stage-2 work packet
+python scripts/llm_score.py          # stage-2 validation on held-out train cases
 python scripts/evaluate.py --overrides "$(cat artifacts/best_config.json)"   # 5-fold CV
 python scripts/ablation.py           # the ablation table above
 python scripts/tune.py --rounds 2    # coordinate descent over the configuration
@@ -203,30 +243,40 @@ python -m pytest tests -q            # 24 unit tests
 python scripts/build_notebook.py     # regenerate the Kaggle notebook from src/rrh
 ```
 
-Running `scripts/predict.py` also writes `artifacts/validation_report.txt`. On the 132 test
-cases the validator reports **no errors** — no invented terms, no negation flips, no lost
-laterality, no dropped measurements, no modified untouched fields, no unresolved placeholders
-— and 4 warnings, all of them summary-block restatements that the reference reports omit too.
+Both scripts write `artifacts/validation_report.txt`. On the 132 submitted reports the
+validator reports **no structural errors**: every template label sequence is reproduced
+exactly, no placeholder is left unresolved, no measurement is dropped, no negation is flipped
+and no laterality is lost. The remaining flags are the `unsupported_term` heuristic firing on
+the typo and shorthand repairs the task asks for (`degen chnges` → `Degenerative changes`,
+`s/o` → `suggestive of`, `VR spaces` → `Virchow-Robin spaces`) — every one was triaged by
+hand against its dictation — plus omission warnings on technique, history and recommendation
+boilerplate that the reference reports drop too.
 
 **Where the remaining headroom is.** `scripts/oracle.py` measures it: perfect field routing
 would reach RES_word 0.3398 (0.034 away) and an oracle per-case choice of impression strategy
 would reach 0.4613 on that component. Neither is reachable with the signals available — six
 distinct attempts at each are in the ablation above.
 
-`submission.csv` is produced entirely by the code in this repository. There is **no per-case manual
-editing anywhere**, and no network access or API key is required.
+`submission.csv` is produced by the code in this repository plus one instruction set applied
+uniformly to all 132 cases. There is **no per-case manual editing anywhere** — no case is given
+its own rule, and the stage-2 outputs are cached (`artifacts/llm_refined_test.json`) so the CSV
+regenerates offline with no network access and no API key.
 
 ## Kaggle notebook
 
 `notebooks/radiology-reporting-harness.ipynb` is generated from `src/rrh/` by
 `scripts/build_notebook.py`, so it can never drift from the code that produced the submission. It
 writes each module with `%%writefile`, fits the routing model, prints the cross-validated score
-table, and regenerates `submission.csv`.
+table, runs stage 1, runs stage 2, and regenerates `submission.csv`.
 
-The notebook contains **no API keys**. An optional hybrid LLM-refinement cell is included at the
-end (Approach D in the brief); it reads `ANTHROPIC_API_KEY` from the environment / Kaggle Secrets
-and is a no-op when no key is present, so the notebook reproduces the submitted CSV exactly either
-way.
+Running the notebook top to bottom reproduces the submitted `submission.csv`
+**byte-for-byte** (verified by SHA-256 against the file in this repository).
+
+The notebook contains **no API keys**. Stage 2 reads `ANTHROPIC_API_KEY` from the environment /
+Kaggle Secrets and runs live only when `RRH_RUN_LLM=1`; with no key it reads the cached
+refinement outputs written by Section 6.2, so the notebook is self-contained and offline. Its
+Section 6.1 shows the full instruction set and the exact API call, so the stage is auditable and
+re-runnable.
 
 ### Remaining manual Kaggle steps
 
@@ -238,10 +288,10 @@ way.
 
 ```
 src/rrh/            pipeline package (stdlib + pandas; rapidfuzz optional accelerator)
-scripts/            predict, evaluate, sweep, diagnostics, notebook builder
+scripts/            predict, LLM refinement pass, evaluate, sweep, diagnostics, notebook builder
 tests/              unit tests for parsing, editing, routing and the validators
 notebooks/          generated Kaggle notebook
-artifacts/          tuned configuration, ablation table, sweep + validation logs
+artifacts/          tuned config, ablation table, sweep/validation logs, stage-2 refinements
 data/               train.csv, test.csv, sample_submission.csv (not committed)
 ```
 

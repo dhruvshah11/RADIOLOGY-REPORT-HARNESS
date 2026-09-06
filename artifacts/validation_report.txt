@@ -1,4 +1,86 @@
-00320399-b3ed-447c-be07-a3e3b9af6e2e	omission	dictated finding not represented: Surgical clips are seen in the gallbladder fossa.
-264a47c5-2b2e-44c6-a38a-bcf692ab5c0e	omission	dictated finding not represented: The airway appears normal.
-264a47c5-2b2e-44c6-a38a-bcf692ab5c0e	omission	dictated finding not represented: The visualized lung apices are clear.
-3ac0bcca-274c-4354-a235-203868739ca9	omission	dictated finding not represented: Visualized sacroiliac joints are maintained.
+01b1c9ab-800b-4963-b11d-9d503952e57c	warn	omission	dictated finding not represented: Rest is normal.
+02aae38a-088b-4cae-bfdc-f0fb38da565d	error	unsupported_term	term not present in template or dictation: levoconvex
+080b9ad5-a25a-4de6-b52c-d1464ea43e93	error	unsupported_term	term not present in template or dictation: along
+080b9ad5-a25a-4de6-b52c-d1464ea43e93	error	unsupported_term	term not present in template or dictation: calcification
+080b9ad5-a25a-4de6-b52c-d1464ea43e93	error	unsupported_term	term not present in template or dictation: consistent
+080b9ad5-a25a-4de6-b52c-d1464ea43e93	error	unsupported_term	term not present in template or dictation: diaphysi
+080b9ad5-a25a-4de6-b52c-d1464ea43e93	error	unsupported_term	term not present in template or dictation: prosthes
+10936c93-1fbc-49e8-a51e-580807955fb8	warn	omission	dictated finding not represented: Evaluation is mildly limited by multiple artifacts.
+12868962-9d03-46f0-8386-538365e5f561	error	unsupported_term	term not present in template or dictation: level
+12868962-9d03-46f0-8386-538365e5f561	warn	omission	dictated finding not represented: Detailed evaluation is limited by metallic artifacts.
+196725dd-aeab-462d-bad5-6e9c8e7cd764	error	unsupported_term	term not present in template or dictation: space
+1b903418-bbc6-43ff-a549-d5bd266ec023	warn	omission	dictated finding not represented: Pre-void bladder volume is not available/measured in the provided imag
+24c20e73-6a0e-40b7-a087-b43c80550e61	error	unsupported_term	term not present in template or dictation: disease
+264a47c5-2b2e-44c6-a38a-bcf692ab5c0e	warn	omission	dictated finding not represented: No significant subluxation.
+27b6c8e6-cd7b-4bae-8b38-27dae5227f39	error	unsupported_term	term not present in template or dictation: chang
+284433c0-f653-4e70-bd6a-db9df082723b	error	laterality	laterality ['left'] lost: MRI Left Ankle Without Contrast.
+284433c0-f653-4e70-bd6a-db9df082723b	warn	omission	dictated finding not represented: MRI Left Ankle Without Contrast.
+284433c0-f653-4e70-bd6a-db9df082723b	warn	omission	dictated finding not represented: Left ankle pain.
+284433c0-f653-4e70-bd6a-db9df082723b	warn	omission	dictated finding not represented: None available at the time of dilatation.
+2baab99b-fea7-4d08-b25e-104098e8f23a	warn	omission	dictated finding not represented: Rest normal.
+2d02f6ad-8a3f-4755-904c-43b0a19f78af	warn	omission	dictated finding not represented: Right Knee Radiographs, 2 Views.
+2d02f6ad-8a3f-4755-904c-43b0a19f78af	warn	omission	dictated finding not represented: None available at the time of dilatation.
+32566854-3c67-4590-8efc-cf69110fba49	warn	omission	dictated finding not represented: Rest normal.
+331058ea-8b7e-44ef-bebf-05d6145c618b	warn	omission	dictated finding not represented: Thoracic Spine Radiographs, 2 Views.
+331058ea-8b7e-44ef-bebf-05d6145c618b	warn	omission	dictated finding not represented: None available at the time of dilatation.
+33b419a8-93ee-4d85-bab7-ea4be76f78d2	error	unsupported_term	term not present in template or dictation: may
+33b419a8-93ee-4d85-bab7-ea4be76f78d2	error	unsupported_term	term not present in template or dictation: related
+33b419a8-93ee-4d85-bab7-ea4be76f78d2	error	unsupported_term	term not present in template or dictation: straighten
+36542d97-8501-4858-b25f-ff97227ddae8	error	unsupported_term	term not present in template or dictation: chang
+36542d97-8501-4858-b25f-ff97227ddae8	warn	omission	dictated finding not represented: degenerative cnhge
+3c2a11ad-ab15-4f85-96d5-01ff5cffffd8	error	unsupported_term	term not present in template or dictation: bilater
+3c2a11ad-ab15-4f85-96d5-01ff5cffffd8	error	unsupported_term	term not present in template or dictation: nuclei
+3c2a11ad-ab15-4f85-96d5-01ff5cffffd8	error	unsupported_term	term not present in template or dictation: robin
+3c2a11ad-ab15-4f85-96d5-01ff5cffffd8	error	unsupported_term	term not present in template or dictation: virchow
+3fdad783-1d5e-417b-9b42-e1ce3c00a8f8	error	unsupported_term	term not present in template or dictation: degenerative
+3fdad783-1d5e-417b-9b42-e1ce3c00a8f8	error	unsupported_term	term not present in template or dictation: narrow
+3fdad783-1d5e-417b-9b42-e1ce3c00a8f8	error	unsupported_term	term not present in template or dictation: osteophyt
+3fdad783-1d5e-417b-9b42-e1ce3c00a8f8	error	unsupported_term	term not present in template or dictation: tibiofemor
+430c0318-b10d-428a-8ffe-e40d1b2ae319	error	unsupported_term	term not present in template or dictation: keep
+430c0318-b10d-428a-8ffe-e40d1b2ae319	warn	omission	dictated finding not represented: Further assessment of neural foraminal and spinal canal stenosis may b
+4589378c-5655-494b-b591-b43fd2b519b6	error	unsupported_term	term not present in template or dictation: endplate
+4589378c-5655-494b-b591-b43fd2b519b6	error	unsupported_term	term not present in template or dictation: hips
+4589378c-5655-494b-b591-b43fd2b519b6	error	unsupported_term	term not present in template or dictation: multilevel
+4589378c-5655-494b-b591-b43fd2b519b6	error	unsupported_term	term not present in template or dictation: osteophyt
+4589378c-5655-494b-b591-b43fd2b519b6	error	unsupported_term	term not present in template or dictation: sacroiliac
+4589378c-5655-494b-b591-b43fd2b519b6	error	unsupported_term	term not present in template or dictation: spin
+49583957-18c2-43d5-bc4c-acc2a41d6e40	warn	omission	dictated finding not represented: rest normal
+4a66a692-c163-4cca-8d59-206c2670a975	error	unsupported_term	term not present in template or dictation: deviated
+4e83994c-4f17-431b-ba2f-4d9347597eaa	warn	omission	dictated finding not represented: Right Knee Radiographs, 3 Views.
+4e83994c-4f17-431b-ba2f-4d9347597eaa	warn	omission	dictated finding not represented: None available at the time of dilatation.
+4f573c02-34e8-4ebf-942e-1b7bf7e2b7b2	warn	omission	dictated finding not represented: Cervical Spine Radiographs, 6 Views.
+4f573c02-34e8-4ebf-942e-1b7bf7e2b7b2	warn	omission	dictated finding not represented: Neck pain.
+53b0c08b-e433-4350-9880-c5b5f71dadd0	error	unsupported_term	term not present in template or dictation: bronchovascul
+53b0c08b-e433-4350-9880-c5b5f71dadd0	error	unsupported_term	term not present in template or dictation: change
+53b0c08b-e433-4350-9880-c5b5f71dadd0	error	unsupported_term	term not present in template or dictation: marking
+5486607a-a7cb-4722-b63e-16022f0b8394	error	unsupported_term	term not present in template or dictation: cerebr
+5486607a-a7cb-4722-b63e-16022f0b8394	error	unsupported_term	term not present in template or dictation: change
+5486607a-a7cb-4722-b63e-16022f0b8394	error	unsupported_term	term not present in template or dictation: generalised
+5486607a-a7cb-4722-b63e-16022f0b8394	error	unsupported_term	term not present in template or dictation: hyperostosi
+5486607a-a7cb-4722-b63e-16022f0b8394	error	unsupported_term	term not present in template or dictation: likel
+5486607a-a7cb-4722-b63e-16022f0b8394	error	unsupported_term	term not present in template or dictation: nuclei
+5486607a-a7cb-4722-b63e-16022f0b8394	error	unsupported_term	term not present in template or dictation: robin
+5486607a-a7cb-4722-b63e-16022f0b8394	error	unsupported_term	term not present in template or dictation: semiovale
+5486607a-a7cb-4722-b63e-16022f0b8394	error	unsupported_term	term not present in template or dictation: virchow
+58fdafd6-4edb-4e60-b0df-0821061121a1	error	unsupported_term	term not present in template or dictation: tricompartment
+63b5c5a0-0baa-49d3-bf1d-92541d3328da	error	unsupported_term	term not present in template or dictation: chang
+63b5c5a0-0baa-49d3-bf1d-92541d3328da	error	unsupported_term	term not present in template or dictation: significant
+63b5c5a0-0baa-49d3-bf1d-92541d3328da	warn	omission	dictated finding not represented: no signficaitn degenerative cahnges
+697eea8a-94bf-4e40-9b09-49e1762f5475	error	unsupported_term	term not present in template or dictation: disease
+697eea8a-94bf-4e40-9b09-49e1762f5475	error	unsupported_term	term not present in template or dictation: multilevel
+6ac8ae67-2f79-4e80-acf5-b2f914450301	error	unsupported_term	term not present in template or dictation: incident
+7a02839e-1e07-44d4-b41e-638a1615c786	warn	omission	dictated finding not represented: Ankle mortise is preserved on the provided views.
+7a837822-a72a-4f21-8750-d36d87d3fdbf	error	unsupported_term	term not present in template or dictation: chang
+8475ae7b-8d0b-4756-9772-b20b98459143	warn	omission	dictated finding not represented: Brain Parenchyma
+8475ae7b-8d0b-4756-9772-b20b98459143	warn	omission	dictated finding not represented: Ventricles / CSF Spaces
+8475ae7b-8d0b-4756-9772-b20b98459143	warn	omission	dictated finding not represented: Posterior Fossa
+8475ae7b-8d0b-4756-9772-b20b98459143	warn	omission	dictated finding not represented: Calvarium / Scalp
+856fb1a7-3dd5-49a1-bf6d-9ed2cc551ec9	error	unsupported_term	term not present in template or dictation: anteroinferior
+856fb1a7-3dd5-49a1-bf6d-9ed2cc551ec9	error	unsupported_term	term not present in template or dictation: head
+88f779c0-bcea-4f26-b8e0-9b718325eb4b	error	unsupported_term	term not present in template or dictation: suggestive
+88f779c0-bcea-4f26-b8e0-9b718325eb4b	warn	omission	dictated finding not represented: rest nromal.
+9f238d30-dbd0-48d2-b327-3528f6542fb5	warn	omission	dictated finding not represented: rest normal
+bcc23ba7-8291-4c7d-8693-6eb23712a447	error	unsupported_term	term not present in template or dictation: mild
+bcc23ba7-8291-4c7d-8693-6eb23712a447	warn	omission	dictated finding not represented: Prior XR Left FOOT.
+cdf174d7-ba12-40ab-99b0-e9d90e55a9fd	error	unsupported_term	term not present in template or dictation: chang
+cdf174d7-ba12-40ab-99b0-e9d90e55a9fd	warn	omission	dictated finding not represented: 90+ year-old male patient with lung base abnormality.
