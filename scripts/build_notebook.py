@@ -201,18 +201,31 @@ Apply exactly these rules to every case:
     inside a findings field).
 4.  Replace or trim only the normal statement the dictation contradicts; keep the
     uncontradicted part of that sentence. If a negated list loses one member
-    ("No A or B" where A is now positive), rewrite it as "No B".
+    ("No A or B" where A is now positive), rewrite it as "No B". A template
+    sentence the dictation never mentions stays (references keep 92% of those),
+    and a field the reference edits still keeps 57% of its template sentences -
+    delete only on a real contradiction.
+4a. Never write a shorter form than the template or the dictation already gives
+    you. Where the dictation confirms a structure is normal without adding
+    anything, keep the template's sentence rather than compressing it to
+    "Intact." - reference field text matches the dictation's length (median
+    difference 0 words), it does not shrink below both sources.
 5.  Drop technique, clinical history, contrast dose, comparison and
     recommendation boilerplate, and section headers that leaked in from the
     dictation's own layout ("Findings", "Impression", "Brain Parenchyma").
+    Keep statements about study limitations ("Evaluation is limited by metallic
+    artifacts") - references keep 85% of those.
 6.  Repair dictation typos and expand shorthand into standard radiology terms
     ("degen chnges" -> "Degenerative changes", "s/o" -> "suggestive of",
     "VR spaces" -> "Virchow-Robin spaces"). Do not repair a term into a
     different entity.
 7.  IMPRESSION: reuse the dictated summary when the dictation has one, in its
-    order; otherwise condense the abnormal findings by removal only. Abnormal
-    items first, the closing negative last, numbered when there is more than one
-    item. Use the template's impression line only when nothing is abnormal, and
+    order and near-verbatim (reference impressions run 1.07x the summary's
+    length - do not aggressively trim it); otherwise condense the abnormal
+    findings by removal only, to about 6 words an item. Abnormal items first,
+    the closing negative last (references put it last 325 times against 34
+    first), numbered when there is more than one item and plain when there is
+    one. Use the template's impression line only when nothing is abnormal, and
     never next to a finding it contradicts.
 8.  Preserve negation, laterality and every measurement exactly as dictated.
 9.  Never introduce a finding, diagnosis, measurement or laterality that is not

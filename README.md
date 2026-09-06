@@ -82,6 +82,51 @@ is honest rather than a fit to the answers.
 
 Better on **21 of the 24** cases. Reproduce with `python scripts/llm_score.py`.
 
+### Calibrating stage 2 against the references (`python scripts/style_study.py`)
+
+The first refinement pass used editing conventions carried over from the stage-1
+configuration. A residual analysis on the 24 validated cases showed the outputs were **8.7%
+shorter than the references** (3036 vs 3325 words) and that the deficit was almost entirely
+*template* sentences deleted without a contradiction — 16 of them, against only 2 dropped
+dictated sentences. So every convention was measured against all 636 training references
+instead of assumed:
+
+| # | question | measurement | verdict |
+|---|---|---|---:|
+| 1 | numbered impression? | 1 item → 18% numbered; ≥2 items → 92% | already correct |
+| 2 | where does the closing negative sit? | last 325 : first 34 | already correct |
+| 3 | template sentences kept in an edited field | 57.3% (pipeline kept 64.7%, pass kept 49.1%) | **over-deleting** |
+| 4 | template sentence the dictation never mentions | kept 92.3% | **restore** |
+| 5 | dictation paraphrases a template line — whose wording? | dictation 1535 : template 265 | already correct |
+| 6 | reference field length vs the dictation's | median difference **0 words** | **never compress below both** |
+| 7 | which non-findings sentences survive | technique 0%, preamble 14%, limitation 85% | **keep limitations** |
+| 8 | abnormal statement first within a field | 85.0% | 76.1% → fixed to 80.7% |
+| 9 | impression length vs the dictated summary | ratio 1.07 | reuse, don't trim |
+
+Two candidate rules were **rejected on the evidence** rather than adopted:
+
+* *Prefer the template's wording when the dictation only confirms a structure is normal.*
+  Splitting question 5 by whether the dictation sentence asserts an abnormality changed
+  nothing — dictation wording wins 66% of confirmations and 75% of abnormal statements. The
+  real error was compressing `Intact and normal in course and signal intensity.` to `Intact.`,
+  which is shorter than *either* source (question 6).
+* *Merge impression items to match the reference median.* In no-summary cases the pass emits
+  ≥3 items 53% of the time against the references' 26%, which looks like over-splitting. But
+  on the 13 no-summary cases with references, the pass's own item count is **closer** to the
+  reference (mean error 0.54) than the distributional predictor would be (0.62). Merging would
+  have chased a median and lost accuracy.
+
+That left 27 targeted corrections across 22 of the 132 reports: 5 template sentences restored
+where nothing contradicted them, 8 compressions undone, 3 study-limitation statements kept,
+2 nerve descriptions restored alongside the dictated carpal-tunnel finding, and 9 fields
+reordered to lead with the abnormality. Content recovered: ~100 words; abnormal-first rose
+from 76.1% to 80.7% against the reference's 85.0%.
+
+The `is_abnormal()` classifier used in question 8 is noisy in both directions
+(`a benign-appearing vertebral hemangioma` reads as normal, `the extraocular muscles are
+symmetric and without abnormal enlargement` reads as abnormal), so the 35 flagged fields were
+read individually and only the 9 unambiguous ones were reordered.
+
 The gains come from four recurring failure modes of the deterministic router, all of which the
 instruction set names explicitly: a clause filed under the wrong label (a PCL finding under
 `ANTERIOR CRUCIATE LIGAMENT`), a section header leaking in from the dictation's own layout
@@ -233,6 +278,8 @@ python scripts/predict.py            # stage 1 only -> submission.csv + validati
 python scripts/apply_overlay.py      # stage 1 + stage 2 -> the submitted submission.csv
 python scripts/llm_sample.py --split test --out artifacts/llm_packet_test.json   # stage-2 work packet
 python scripts/llm_score.py          # stage-2 validation on held-out train cases
+python scripts/style_study.py        # reference editing conventions (the table below)
+python scripts/dropped_normals.py    # template sentences stage 2 deleted, for review
 python scripts/evaluate.py --overrides "$(cat artifacts/best_config.json)"   # 5-fold CV
 python scripts/ablation.py           # the ablation table above
 python scripts/tune.py --rounds 2    # coordinate descent over the configuration

@@ -5,9 +5,8 @@
 080b9ad5-a25a-4de6-b52c-d1464ea43e93	error	unsupported_term	term not present in template or dictation: consistent
 080b9ad5-a25a-4de6-b52c-d1464ea43e93	error	unsupported_term	term not present in template or dictation: diaphysi
 080b9ad5-a25a-4de6-b52c-d1464ea43e93	error	unsupported_term	term not present in template or dictation: prosthes
-10936c93-1fbc-49e8-a51e-580807955fb8	warn	omission	dictated finding not represented: Evaluation is mildly limited by multiple artifacts.
 12868962-9d03-46f0-8386-538365e5f561	error	unsupported_term	term not present in template or dictation: level
-12868962-9d03-46f0-8386-538365e5f561	warn	omission	dictated finding not represented: Detailed evaluation is limited by metallic artifacts.
+196725dd-aeab-462d-bad5-6e9c8e7cd764	error	unsupported_term	term not present in template or dictation: densit
 196725dd-aeab-462d-bad5-6e9c8e7cd764	error	unsupported_term	term not present in template or dictation: space
 1b903418-bbc6-43ff-a549-d5bd266ec023	warn	omission	dictated finding not represented: Pre-void bladder volume is not available/measured in the provided imag
 24c20e73-6a0e-40b7-a087-b43c80550e61	error	unsupported_term	term not present in template or dictation: disease
