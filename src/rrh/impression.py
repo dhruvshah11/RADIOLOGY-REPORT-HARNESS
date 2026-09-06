@@ -106,13 +106,29 @@ def build_impression(
         items = [condense(x) for x in dictated_summary]
         cap = cfg.summary_cap
     else:
-        items = [condense(x, trim_detail=cfg.trim_detail) for x in findings]
+        source = findings
+        if cfg.findings_require_abnormal:
+            abnormal = [x for x in findings if is_abnormal(x)]
+            if not abnormal:
+                # nothing abnormal was dictated: restating normal findings is
+                # not an impression.  Fall back to the template's normal line,
+                # optionally preceded by the dictation's own negative summary.
+                if cfg.no_abnormal_fallback == "negatives":
+                    source = [x for x in findings if is_negative(x)][-1:]
+                else:
+                    source = []
+            else:
+                source = abnormal
+        items = [condense(x, trim_detail=cfg.trim_detail) for x in source]
         cap = cfg.findings_cap
 
     items = [x for x in items if not is_normal_statement(x)]
-    if cfg.drop_negative_impression:
+    if cfg.drop_negative_impression and not (
+        not dictated_summary and cfg.no_abnormal_fallback == "negatives" and items
+        and all(is_negative(x) for x in items)
+    ):
         items = [x for x in items if not is_negative(x)]
-    items = _dedupe(items)
+    items = _dedupe(items, cfg.impression_dedupe)
     if cfg.rank_impression_by_severity and not dictated_summary:
         items = sorted(items, key=lambda x: -severity(x))
     if cap:

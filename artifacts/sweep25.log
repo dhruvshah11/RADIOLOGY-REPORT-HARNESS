@@ -1,0 +1,19 @@
+word=0.3883 char=0.3294 raw=0.3302 find=0.3590 imp=0.6045 fx=0.414 cRec=0.921 | {"viterbi": true, "w_continuity": 0.3, "w_backward": 1.0} [12s]
+word=0.3917 char=0.3320 raw=0.3328 find=0.3639 imp=0.6045 fx=0.413 cRec=0.922 | {"viterbi": true, "w_continuity": 0.3, "w_backward": 2.0} [11s]
+word=0.3900 char=0.3309 raw=0.3316 find=0.3603 imp=0.6045 fx=0.415 cRec=0.922 | {"viterbi": true, "w_continuity": 0.6, "w_backward": 1.0} [10s]
+word=0.3928 char=0.3332 raw=0.3339 find=0.3647 imp=0.6045 fx=0.414 cRec=0.922 | {"viterbi": true, "w_continuity": 0.6, "w_backward": 2.0} [11s]
+word=0.3934 char=0.3334 raw=0.3342 find=0.3654 imp=0.6047 fx=0.415 cRec=0.922 | {"viterbi": true, "w_continuity": 1.0, "w_backward": 1.0} [10s]
+word=0.4006 char=0.3397 raw=0.3405 find=0.3754 imp=0.6047 fx=0.412 cRec=0.922 | {"viterbi": true, "w_continuity": 1.0, "w_backward": 2.0} [11s]
+word=0.3883 char=0.3294 raw=0.3302 find=0.3590 imp=0.6045 fx=0.414 cRec=0.921 | {"viterbi": false, "w_continuity": 0.3, "w_backward": 1.0} [11s]
+word=0.3917 char=0.3320 raw=0.3328 find=0.3639 imp=0.6045 fx=0.413 cRec=0.922 | {"viterbi": false, "w_continuity": 0.3, "w_backward": 2.0} [10s]
+word=0.3900 char=0.3309 raw=0.3316 find=0.3603 imp=0.6045 fx=0.415 cRec=0.922 | {"viterbi": false, "w_continuity": 0.6, "w_backward": 1.0} [10s]
+word=0.3928 char=0.3332 raw=0.3339 find=0.3647 imp=0.6045 fx=0.414 cRec=0.922 | {"viterbi": false, "w_continuity": 0.6, "w_backward": 2.0} [11s]
+word=0.3934 char=0.3334 raw=0.3342 find=0.3654 imp=0.6047 fx=0.415 cRec=0.922 | {"viterbi": false, "w_continuity": 1.0, "w_backward": 1.0} [11s]
+word=0.4006 char=0.3397 raw=0.3405 find=0.3754 imp=0.6047 fx=0.412 cRec=0.922 | {"viterbi": false, "w_continuity": 1.0, "w_backward": 2.0} [11s]
+
+### TOP 5 ###
+  0.3883  {"viterbi": true, "w_continuity": 0.3, "w_backward": 1.0}
+  0.3883  {"viterbi": false, "w_continuity": 0.3, "w_backward": 1.0}
+  0.3900  {"viterbi": true, "w_continuity": 0.6, "w_backward": 1.0}
+  0.3900  {"viterbi": false, "w_continuity": 0.6, "w_backward": 1.0}
+  0.3917  {"viterbi": true, "w_continuity": 0.3, "w_backward": 2.0}

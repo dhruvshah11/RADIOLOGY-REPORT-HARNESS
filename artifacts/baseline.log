@@ -1,0 +1,3 @@
+template passthrough (blank sep)       n=636  RES_word=0.6393  RES_char=0.5740  RES_raw=0.5723  RES_sent=0.6805  find=0.5656  imp=0.8910  labelF1=0.9958  fieldExact=0.4008  fieldRES=0.4828  cRec=0.533  cPrec=0.817
+template passthrough (no blank)        n=636  RES_word=0.6393  RES_char=0.5740  RES_raw=0.5762  RES_sent=0.6805  find=0.5656  imp=0.8910  labelF1=0.9958  fieldExact=0.4008  fieldRES=0.4828  cRec=0.533  cPrec=0.817
+template + raw dictation impression    n=636  RES_word=0.6130  RES_char=0.5268  RES_raw=0.5307  RES_sent=0.7809  find=0.5656  imp=2.3697  labelF1=0.9958  fieldExact=0.4008  fieldRES=0.4828  cRec=0.933  cPrec=0.873

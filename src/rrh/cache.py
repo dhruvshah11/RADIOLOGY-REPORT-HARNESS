@@ -23,13 +23,14 @@ def source_fingerprint() -> str:
     return h.hexdigest()[:12]
 
 
-def cache_path(artifacts_dir: str) -> str:
+def cache_path(artifacts_dir: str, key: str = "") -> str:
     os.makedirs(artifacts_dir, exist_ok=True)
-    return os.path.join(artifacts_dir, f"fold_models.{source_fingerprint()}.pkl")
+    suffix = "" if not key else "." + hashlib.sha256(key.encode()).hexdigest()[:8]
+    return os.path.join(artifacts_dir, f"fold_models.{source_fingerprint()}{suffix}.pkl")
 
 
-def load_or_build(artifacts_dir: str, build):
-    path = cache_path(artifacts_dir)
+def load_or_build(artifacts_dir: str, build, key: str = ""):
+    path = cache_path(artifacts_dir, key)
     if os.path.exists(path):
         with open(path, "rb") as fh:
             return pickle.load(fh)

@@ -7,11 +7,11 @@ import os, sys, json, hashlib
 sys.path.insert(0, os.path.join(%r, "src"))
 import pandas as pd
 from rrh.pipeline import Config, ReportGenerator
-from rrh.routing import fit_router
+from rrh.routing import fit_ranked_router
 train = pd.read_csv(os.path.join(%r, "data", "train.csv"))
 test = pd.read_csv(os.path.join(%r, "data", "test.csv"))
 cfg = Config(**json.load(open(os.path.join(%r, "artifacts", "best_config.json"))))
-gen = ReportGenerator(fit_router(train.to_dict("records")), cfg)
+gen = ReportGenerator(fit_ranked_router(train.to_dict("records"), cfg), cfg)
 blob = "\\n\\x00\\n".join(gen.generate(r)[0] for r in test.to_dict("records"))
 print(hashlib.sha256(blob.encode()).hexdigest())
 """ % (ROOT, ROOT, ROOT, ROOT)

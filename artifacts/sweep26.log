@@ -1,0 +1,6 @@
+word=0.3883 char=0.3294 raw=0.3302 find=0.3590 imp=0.6045 fx=0.414 cRec=0.921 | {"use_ranker": false} [29s]
+word=0.3938 char=0.3347 raw=0.3354 find=0.3649 imp=0.6049 fx=0.412 cRec=0.921 | {"use_ranker": true} [125s]
+
+### TOP 5 ###
+  0.3883  {"use_ranker": false}
+  0.3938  {"use_ranker": true}

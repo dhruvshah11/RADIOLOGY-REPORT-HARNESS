@@ -4,22 +4,23 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 import pandas as pd
 from rrh.cache import load_or_build
 from rrh.metrics import evaluate
-from rrh.pipeline import Config, ReportGenerator
-from rrh.routing import fit_router
+from rrh.pipeline import Config, ReportGenerator, model_key
+from rrh.routing import fit_ranked_router
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 K = 5
 
 
-def fold_models(rows):
+def fold_models(rows, cfg):
     folds = [rows[i::K] for i in range(K)]
 
     def build():
         return [
-            fit_router([r for j in range(K) if j != f for r in folds[j]]) for f in range(K)
+            fit_ranked_router([r for j in range(K) if j != f for r in folds[j]], cfg)
+            for f in range(K)
         ]
 
-    return load_or_build(os.path.join(ROOT, "artifacts"), build)
+    return load_or_build(os.path.join(ROOT, "artifacts"), build, key=model_key(cfg))
 
 
 def cv_score(rows, refs, models, cfg):
@@ -40,7 +41,6 @@ def main():
     args = ap.parse_args()
     tr = pd.read_csv(os.path.join(ROOT, "data", "train.csv"))
     rows = tr.to_dict("records")
-    models = fold_models(rows)
     base = json.loads(args.base)
     grid = json.loads(args.grid)
     keys = list(grid)
@@ -49,7 +49,7 @@ def main():
         over = dict(zip(keys, combo))
         cfg = Config(**{**base, **over})
         t0 = time.time()
-        sc = cv_score(rows, tr.report.tolist(), models, cfg)
+        sc = cv_score(rows, tr.report.tolist(), fold_models(rows, cfg), cfg)
         results.append((sc.res_word, over, sc))
         print(f"word={sc.res_word:.4f} char={sc.res_char:.4f} raw={sc.res_raw:.4f} "
               f"find={sc.findings_res:.4f} imp={sc.impression_res:.4f} "

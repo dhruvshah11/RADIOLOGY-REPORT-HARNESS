@@ -34,6 +34,17 @@ def res_char(pred: str, ref: str) -> float:
     return levenshtein(p, r) / len(r)
 
 
+def res_sent(pred: str, ref: str) -> float:
+    """Edit distance counted in whole sentences - the unit a radiologist edits."""
+    from .textutil import split_sentences
+
+    r = [key(x) for x in split_sentences(ref) if key(x)]
+    p = [key(x) for x in split_sentences(pred) if key(x)]
+    if not r:
+        return 0.0 if not p else 1.0
+    return levenshtein(p, r) / len(r)
+
+
 def res_raw(pred: str, ref: str) -> float:
     """Formatting-sensitive variant: raw characters, nothing normalised."""
     r = (ref or "").strip()
@@ -72,6 +83,7 @@ class Score:
     res_word: float
     res_char: float
     res_raw: float
+    res_sent: float
     findings_res: float
     impression_res: float
     field_label_f1: float
@@ -83,7 +95,7 @@ class Score:
     def as_row(self) -> str:
         return (
             f"n={self.n}  RES_word={self.res_word:.4f}  RES_char={self.res_char:.4f}  "
-            f"RES_raw={self.res_raw:.4f}  "
+            f"RES_raw={self.res_raw:.4f}  RES_sent={self.res_sent:.4f}  "
             f"find={self.findings_res:.4f}  imp={self.impression_res:.4f}  "
             f"labelF1={self.field_label_f1:.4f}  fieldExact={self.field_exact:.4f}  "
             f"fieldRES={self.field_res:.4f}  cRec={self.content_recall:.3f}  "
@@ -95,7 +107,7 @@ def evaluate(preds: list[str], refs: list[str]) -> Score:
     acc = {
         k: 0.0
         for k in (
-            "res_word res_char res_raw findings_res impression_res field_label_f1 "
+            "res_word res_char res_raw res_sent findings_res impression_res field_label_f1 "
             "field_exact field_res content_recall content_precision"
         ).split()
     }
@@ -104,6 +116,7 @@ def evaluate(preds: list[str], refs: list[str]) -> Score:
         acc["res_word"] += res_word(p, r)
         acc["res_char"] += res_char(p, r)
         acc["res_raw"] += res_raw(p, r)
+        acc["res_sent"] += res_sent(p, r)
         pf, pi = split_parts(p)
         rf, ri = split_parts(r)
         acc["findings_res"] += res_word(pf, rf)

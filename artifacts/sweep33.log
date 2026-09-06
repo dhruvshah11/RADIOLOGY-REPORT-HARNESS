@@ -1,0 +1,6 @@
+word=0.3803 char=0.3248 raw=0.3255 find=0.3514 imp=0.5633 fx=0.413 cRec=0.922 | {"findings_require_abnormal": true} [32s]
+word=0.3807 char=0.3240 raw=0.3247 find=0.3514 imp=0.5891 fx=0.413 cRec=0.922 | {"findings_require_abnormal": false} [12s]
+
+### TOP 5 ###
+  0.3803  {"findings_require_abnormal": true}
+  0.3807  {"findings_require_abnormal": false}

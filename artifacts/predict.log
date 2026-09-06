@@ -1,15 +1,6 @@
 wrote /home/user/RADIOLOGY-REPORT-HARNESS/scripts/../submission.csv: 132 rows
-validation issues: {"omission": 13}
-  omission           dictated finding not represented: No acute osseous abnormality.
-  omission           dictated finding not represented: No gross focal abnormality is identified in the visualized posterior e
-  omission           dictated finding not represented: Prevertebral soft tissues are unremarkable.
-  omission           dictated finding not represented: No focal pancreatic mass or other definite abnormality identified.
+validation issues: {"omission": 4}
+  omission           dictated finding not represented: Surgical clips are seen in the gallbladder fossa.
   omission           dictated finding not represented: The airway appears normal.
   omission           dictated finding not represented: The visualized lung apices are clear.
-  omission           dictated finding not represented: No loosening or complication evident.
-  omission           dictated finding not represented: No discrete rim-enhancing fluid collection or drainable abscess identi
   omission           dictated finding not represented: Visualized sacroiliac joints are maintained.
-  omission           dictated finding not represented: No associated periosteal reaction or acute osseous abnormality is iden
-  omission           dictated finding not represented: Visualized surrounding musculature is otherwise preserved.
-  omission           dictated finding not represented: No significant adjacent soft-tissue edema or fluid collection.
-  omission           dictated finding not represented: No acute calvarial abnormality.

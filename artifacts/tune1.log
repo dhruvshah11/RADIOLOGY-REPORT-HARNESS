@@ -1,0 +1,96 @@
+start  obj=0.35926  n=636  RES_word=0.3880  RES_char=0.3305  RES_raw=0.3312  find=0.3590  imp=0.5794  labelF1=0.9958  fieldExact=0.4142  fieldRES=0.3799  cRec=0.921  cPrec=0.920
+  r0 cover_threshold=     0.0 obj=0.37111 word=0.3996 char=0.3426 [10s]
+  r0 cover_threshold=    0.05 obj=0.35915 word=0.3879 char=0.3304 [10s]  <-- keep
+  r0 cover_threshold=    0.12 obj=0.35926 word=0.3880 char=0.3305 [10s]
+  r0 cover_threshold=     0.2 obj=0.36004 word=0.3888 char=0.3312 [10s]
+  r0 cover_threshold=     0.3 obj=0.36643 word=0.3959 char=0.3370 [10s]
+  r0 dedupe_threshold=     0.0 obj=0.36001 word=0.3887 char=0.3313 [10s]
+  r0 dedupe_threshold=     0.6 obj=0.35955 word=0.3884 char=0.3307 [10s]
+  r0 dedupe_threshold=     0.8 obj=0.35910 word=0.3878 char=0.3304 [10s]  <-- keep
+  r0 dedupe_threshold=     0.9 obj=0.35967 word=0.3885 char=0.3309 [11s]
+  r0 min_route_score=     0.2 obj=0.35957 word=0.3883 char=0.3309 [11s]
+  r0 min_route_score=     0.7 obj=0.35924 word=0.3880 char=0.3305 [11s]
+  r0 min_route_score=     1.0 obj=0.35912 word=0.3879 char=0.3304 [11s]
+  r0 group_penalty=     0.5 obj=0.36049 word=0.3893 char=0.3317 [10s]
+  r0 group_penalty=     1.6 obj=0.35904 word=0.3878 char=0.3302 [11s]  <-- keep
+  r0 group_penalty=     2.5 obj=0.35975 word=0.3887 char=0.3308 [11s]
+  r0 cue_veto_penalty=     0.0 obj=0.36011 word=0.3890 char=0.3312 [10s]
+  r0 cue_veto_penalty=     0.4 obj=0.35980 word=0.3887 char=0.3309 [10s]
+  r0 cue_veto_penalty=     1.4 obj=0.35902 word=0.3878 char=0.3302 [11s]  <-- keep
+  r0 split_margin=    -0.6 obj=0.36118 word=0.3903 char=0.3321 [11s]
+  r0 split_margin=    -0.3 obj=0.35897 word=0.3878 char=0.3302 [11s]  <-- keep
+  r0 split_margin=     0.0 obj=0.35902 word=0.3878 char=0.3302 [11s]
+  r0 split_margin=     0.3 obj=0.35915 word=0.3881 char=0.3302 [11s]
+  r0 w_cue=     2.0 obj=0.35802 word=0.3868 char=0.3293 [11s]  <-- keep
+  r0 w_cue=     3.0 obj=0.35897 word=0.3878 char=0.3302 [11s]
+  r0 w_cue=     4.5 obj=0.36114 word=0.3901 char=0.3321 [11s]
+  r0 w_label=     1.4 obj=0.35880 word=0.3875 char=0.3301 [11s]
+  r0 w_label=     3.0 obj=0.35989 word=0.3888 char=0.3310 [11s]
+  r0 w_concept=     0.6 obj=0.36124 word=0.3903 char=0.3321 [11s]
+  r0 w_concept=     2.0 obj=0.35877 word=0.3873 char=0.3303 [11s]
+  r0 w_template=     0.5 obj=0.35966 word=0.3886 char=0.3307 [11s]
+  r0 w_template=     1.6 obj=0.35799 word=0.3866 char=0.3294 [11s]  <-- keep
+  r0 w_mined=     0.6 obj=0.36184 word=0.3906 char=0.3330 [11s]
+  r0 w_mined=     2.0 obj=0.35814 word=0.3868 char=0.3295 [11s]
+  r0 w_knn=     1.0 obj=0.36049 word=0.3892 char=0.3318 [11s]
+  r0 w_knn=     2.4 obj=0.36101 word=0.3901 char=0.3319 [11s]
+  r0 w_continuity=     0.0 obj=0.35919 word=0.3879 char=0.3305 [11s]
+  r0 w_continuity=     0.6 obj=0.35806 word=0.3868 char=0.3293 [11s]
+  r0 w_backward=     0.5 obj=0.35902 word=0.3876 char=0.3305 [11s]
+  r0 w_backward=     1.6 obj=0.35913 word=0.3879 char=0.3303 [11s]
+  r0 summary_threshold=    0.18 obj=0.36243 word=0.3914 char=0.3334 [32s]
+  r0 summary_threshold=    0.28 obj=0.35867 word=0.3873 char=0.3301 [23s]
+  r0 summary_max_misses=       2 obj=0.35703 word=0.3856 char=0.3284 [23s]  <-- keep
+  r0 summary_max_misses=       3 obj=0.35799 word=0.3866 char=0.3294 [12s]
+  r0 summary_max_misses=       4 obj=0.35945 word=0.3881 char=0.3308 [23s]
+  r0 findings_cap=       1 obj=0.35756 word=0.3856 char=0.3295 [12s]
+  r0 findings_cap=       3 obj=0.35935 word=0.3883 char=0.3304 [11s]
+  r0 summary_cap=       6 obj=0.35780 word=0.3863 char=0.3293 [11s]
+  r0 summary_cap=       8 obj=0.35710 word=0.3857 char=0.3285 [11s]
+  r0 findings_require_abnormal=   False obj=0.35664 word=0.3858 char=0.3275 [11s]  <-- keep
+  r0 trim_detail=   False obj=0.36237 word=0.3917 char=0.3330 [11s]
+  r0 drop_negative_impression=   False obj=0.35996 word=0.3904 char=0.3295 [11s]
+  r0 number_impression=   False obj=0.36087 word=0.3914 char=0.3303 [11s]
+  r0 abnormal_first=   False obj=0.36565 word=0.3954 char=0.3359 [11s]
+  r0 normalize_shorthand=   False obj=0.35980 word=0.3895 char=0.3301 [21s]
+  r0 correct_spelling=   False obj=0.35870 word=0.3883 char=0.3291 [21s]
+round 0 done: obj=0.35664
+
+FINAL obj=0.35664  n=636  RES_word=0.3858  RES_char=0.3275  RES_raw=0.3283  find=0.3561  imp=0.5980  labelF1=0.9958  fieldExact=0.4144  fieldRES=0.3708  cRec=0.924  cPrec=0.920
+{
+  "abnormal_first": true,
+  "add_copula": false,
+  "add_existential": false,
+  "allow_splitting": true,
+  "append_template_impression": true,
+  "blank_between_fields": true,
+  "correct_spelling": true,
+  "cover_threshold": 0.05,
+  "cue_match_min": 0.34,
+  "cue_veto_penalty": 1.4,
+  "dedupe_threshold": 0.8,
+  "drop_negative_impression": true,
+  "findings_cap": 2,
+  "findings_require_abnormal": false,
+  "group_penalty": 1.6,
+  "keep_unrouted": true,
+  "min_route_score": 0.45,
+  "normalize_shorthand": true,
+  "number_impression": true,
+  "rank_impression_by_severity": false,
+  "recover_summary": false,
+  "soften_blanket": false,
+  "split_margin": -0.3,
+  "style_threshold": 0.0,
+  "summary_cap": 0,
+  "summary_max_misses": 2,
+  "summary_recover_threshold": 0.6,
+  "summary_threshold": 0.23,
+  "suppress_redundant_negatives": false,
+  "suppress_redundant_normals": false,
+  "trim_detail": true,
+  "w_backward": 1.0,
+  "w_continuity": 0.3,
+  "w_cue": 2.0,
+  "w_template": 1.6
+}

@@ -127,6 +127,7 @@ def render_report(
     impression_lines: list[str],
     extra_paragraphs: list[str] | None = None,
     blank_between_fields: bool = True,
+    merge_extras: bool = False,
 ) -> str:
     """Assemble the final report.
 
@@ -145,11 +146,12 @@ def render_report(
                 lines.append(body)
             continue
         lines.append(f"{label}: {body}".rstrip() if body else f"{label}:")
-    for para in extra_paragraphs or []:
-        para = squash(para)
-        if para:
-            lines.append("")
-            lines.append(para)
+    paras = [squash(p) for p in (extra_paragraphs or []) if squash(p)]
+    if merge_extras and paras:
+        paras = [" ".join(paras)]
+    for para in paras:
+        lines.append("")
+        lines.append(para)
     lines.append("")
     lines.append("IMPRESSION:")
     lines.extend(squash(x) for x in impression_lines if squash(x))

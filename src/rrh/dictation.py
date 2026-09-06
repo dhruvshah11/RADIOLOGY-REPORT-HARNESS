@@ -26,7 +26,9 @@ LEVEL_RE = re.compile(r"\b([CTLS])\s*(\d{1,2})\s*[-–/]\s*(?:[CTLS])?\s*(\d{1,2
 TECHNIQUE_PAT = re.compile(
     r"(was|were)\s+(performed|obtained|acquired)|"
     r"^(multiplanar|multisequence|multi-planar|axial|sagittal|coronal|sequences?|"
-    r"technique|protocol|images?\s+were|imaging\s+was|scout|localizer)\b|"
+    r"technique|protocol|images?\s+were|imaging\s+was|scout|localizer|"
+    r"post-?processed|reformat\w*|reconstruct\w*|magnetic\s+resonance|"
+    r"computed\s+tomograph\w*|hrct\b|thin[- ]section)\b|"
     r"\b(radiograph|view|projection)s?\s+(of|were|was|obtained|acquired)\b|"
     r"^\s*(\d+|two|three|four|five|six|single|frontal|lateral|ap and lateral)[\w\- ]{0,25}"
     r"(views?|radiographs?|projections?)\b|"
@@ -38,7 +40,11 @@ HISTORY_PAT = re.compile(
     r"\b(pain|swelling|trauma|injury|fall|weakness|numbness|tingling|discomfort|"
     r"complaint|symptoms?)\s+(for|since|x)\s+\d|"
     r"^(clinical\s+)?(history|indication|hx)\b|"
-    r"\b(rule\s+out|r/o)\b\s*$",
+    r"\b(rule\s+out|r/o)\b\s*$|"
+    # "15-19-year-old with back pain (M54.9)." - age band, referral, ICD code
+    r"\b\d{1,3}\s*(?:-\s*\d{1,3}\s*)?[- ]year[- ]old\b|"
+    r"\(\s*[A-TV-Z]\d{2}(?:\.\d+)?\s*\)|"
+    r"^(shortness of breath|sob|chest pain|back pain|abdominal pain|headache|fever)\b",
     re.I,
 )
 RECOMMEND_PAT = re.compile(
@@ -47,15 +53,30 @@ RECOMMEND_PAT = re.compile(
     r"clinical\s+correlation\s+(is\s+)?(recommended|suggested|advised))",
     re.I,
 )
-NONE_PAT = re.compile(r"^(none|n/?a|nil|no prior|no comparison|not applicable)\.?$", re.I)
+ADVISED_PAT = re.compile(
+    r"\b(is|are)\s+(advised|recommended|suggested|indicated)\b|"
+    r"\bfor\s+further\s+(characteri[sz]ation|evaluation|assessment|workup)\b|"
+    r"\bcorrelation\s+is\s+(advised|recommended|suggested)\b",
+    re.I,
+)
+NONE_PAT = re.compile(
+    r"^(none|n/?a|nil|not applicable)(\s+(available|provided|performed|obtained))?\s*\.?$|"
+    r"^("
+    r"(no\s+)?(prior|previous|comparison)s?(\s+(study|studies|exam\w*|imaging))?"
+    r"(\s+(are|is|were|was))?(\s+(available|provided|performed))?)\s*\.?$",
+    re.I,
+)
 MODALITY_HEADER = re.compile(
     r"^(mri|mr|ct|cta|mra|mrcp|us|usg|ultrasound|sonograph\w*|x-?ray|xr|radiograph\w*|"
     r"pet|dexa|fluoroscop\w*)\b",
     re.I,
 )
 CONTRAST_PAT = re.compile(
-    r"\b(gadavist|gadolinium|gadobutrol|omnipaque|iohexol|ioversol|contrast\s+material|"
-    r"contrast\s+agent)\b|^\s*\w+\s+\d+(?:\.\d+)?\s*(?:ml|cc|mg)\s+(?:iv|i\.v\.)\b",
+    r"\b(gadavist|gadolinium|gadobutrol|omnipaque|iohexol|ioversol|isovue|optiray|"
+    r"ultravist|visipaque|contrast\s+material|contrast\s+agent)\b|"
+    r"^\s*\w+\s+\d+(?:\.\d+)?\s*(?:ml|cc|mg)\s+(?:iv|i\.v\.)\b|"
+    r"\b\d+(?:\.\d+)?\s*(?:ml|cc)\b[^.]{0,40}\b(administered|injected|intravenous(?:ly)?|"
+    r"orally|per\s+oral)\b",
     re.I,
 )
 SYMPTOM_PAT = re.compile(
@@ -140,7 +161,7 @@ def _classify_boilerplate(sent: str) -> str | None:
     s = sent.strip()
     if NONE_PAT.match(s):
         return "preamble"
-    if RECOMMEND_PAT.match(s):
+    if RECOMMEND_PAT.match(s) or ADVISED_PAT.search(s):
         return "preamble"
     if HISTORY_PAT.search(s):
         return "preamble"
@@ -192,7 +213,8 @@ def _match_score(a: Segment, prior: list[Segment]) -> float:
     return best
 
 
-def _detect_summary(segs: list[Segment], threshold: float = 0.34, max_misses: int = 3) -> int:
+def _detect_summary(segs: list[Segment], threshold: float = 0.34, max_misses: int = 3,
+                    after_cues: bool = False) -> int:
     """Index where the dictated impression starts (len(segs) if there is none).
 
     Two independent signals: a global conclusion sentence in the back part of
@@ -209,6 +231,9 @@ def _detect_summary(segs: list[Segment], threshold: float = 0.34, max_misses: in
     body_limit = max(body_limit, last_cue + 1)
     if body_limit >= n - 1:
         return n
+    if after_cues and last_cue >= 0 and n - (last_cue + 1) >= 2:
+        # a structured dictation ends its cued sections and then summarises
+        return last_cue + 1
 
     marker = n
     for i in range(body_limit, n - 1):
@@ -243,6 +268,7 @@ def segment_dictation(
     vocab: dict[str, int] | None = None,
     summary_threshold: float = 0.34,
     summary_max_misses: int = 3,
+    summary_after_cues: bool = False,
 ) -> DictationDoc:
     text = clean_ws(raw or "")
     if normalize:
@@ -281,7 +307,7 @@ def segment_dictation(
 
 
     body = [b for b in body if content_tokens(b.text)]
-    cut = _detect_summary(body, summary_threshold, summary_max_misses)
+    cut = _detect_summary(body, summary_threshold, summary_max_misses, summary_after_cues)
     findings, impression = body[:cut], body[cut:]
     for seg in impression:
         seg.kind = "impression"

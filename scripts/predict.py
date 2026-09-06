@@ -3,7 +3,7 @@ import os, sys, json, argparse, csv
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 import pandas as pd
 from rrh.pipeline import Config, ReportGenerator
-from rrh.routing import fit_router
+from rrh.routing import fit_ranked_router
 from rrh.validate import validate
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
@@ -21,7 +21,7 @@ def main():
 
     cfg_dict = json.load(open(args.cfg)) if os.path.exists(args.cfg) else {}
     cfg = Config(**cfg_dict)
-    gen = ReportGenerator(fit_router(train.to_dict("records")), cfg)
+    gen = ReportGenerator(fit_ranked_router(train.to_dict("records"), cfg), cfg)
 
     reports, issues, details = {}, {}, []
     for row in test.to_dict("records"):

@@ -1,0 +1,19 @@
+word=0.3885 char=0.3295 raw=0.3303 find=0.3592 imp=0.6045 fx=0.413 cRec=0.921 | {"w_continuity": 0.15, "w_backward": 1.0} [12s]
+word=0.3887 char=0.3295 raw=0.3303 find=0.3597 imp=0.6045 fx=0.414 cRec=0.922 | {"w_continuity": 0.15, "w_backward": 1.6} [10s]
+word=0.3911 char=0.3311 raw=0.3319 find=0.3630 imp=0.6045 fx=0.413 cRec=0.922 | {"w_continuity": 0.15, "w_backward": 2.2} [10s]
+word=0.3960 char=0.3357 raw=0.3366 find=0.3703 imp=0.6045 fx=0.411 cRec=0.922 | {"w_continuity": 0.15, "w_backward": 3.0} [10s]
+word=0.3883 char=0.3294 raw=0.3302 find=0.3590 imp=0.6045 fx=0.414 cRec=0.921 | {"w_continuity": 0.3, "w_backward": 1.0} [11s]
+word=0.3896 char=0.3304 raw=0.3312 find=0.3610 imp=0.6045 fx=0.413 cRec=0.922 | {"w_continuity": 0.3, "w_backward": 1.6} [10s]
+word=0.3922 char=0.3324 raw=0.3332 find=0.3645 imp=0.6045 fx=0.413 cRec=0.922 | {"w_continuity": 0.3, "w_backward": 2.2} [10s]
+word=0.3965 char=0.3363 raw=0.3371 find=0.3711 imp=0.6045 fx=0.412 cRec=0.922 | {"w_continuity": 0.3, "w_backward": 3.0} [10s]
+word=0.3885 char=0.3298 raw=0.3306 find=0.3585 imp=0.6045 fx=0.414 cRec=0.922 | {"w_continuity": 0.45, "w_backward": 1.0} [10s]
+word=0.3900 char=0.3306 raw=0.3314 find=0.3610 imp=0.6045 fx=0.413 cRec=0.922 | {"w_continuity": 0.45, "w_backward": 1.6} [10s]
+word=0.3921 char=0.3327 raw=0.3334 find=0.3638 imp=0.6045 fx=0.412 cRec=0.922 | {"w_continuity": 0.45, "w_backward": 2.2} [10s]
+word=0.3985 char=0.3379 raw=0.3387 find=0.3732 imp=0.6045 fx=0.407 cRec=0.922 | {"w_continuity": 0.45, "w_backward": 3.0} [10s]
+
+### TOP 5 ###
+  0.3883  {"w_continuity": 0.3, "w_backward": 1.0}
+  0.3885  {"w_continuity": 0.45, "w_backward": 1.0}
+  0.3885  {"w_continuity": 0.15, "w_backward": 1.0}
+  0.3887  {"w_continuity": 0.15, "w_backward": 1.6}
+  0.3896  {"w_continuity": 0.3, "w_backward": 1.6}
