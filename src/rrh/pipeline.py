@@ -61,6 +61,7 @@ class Config:
     summary_threshold: float = 0.34
     summary_max_misses: int = 3
     summary_after_cues: bool = False
+    drop_layout_headers: bool = True
     recover_summary: bool = True
     summary_recover_threshold: float = 0.6
     # impression
@@ -268,6 +269,7 @@ class ReportGenerator:
             summary_threshold=cfg.summary_threshold,
             summary_max_misses=cfg.summary_max_misses,
             summary_after_cues=cfg.summary_after_cues,
+            drop_layout_headers=cfg.drop_layout_headers,
         )
         laterality = infer_laterality(row)
         region = infer_region(row)

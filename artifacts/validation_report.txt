@@ -70,10 +70,7 @@
 6ac8ae67-2f79-4e80-acf5-b2f914450301	error	unsupported_term	term not present in template or dictation: incident
 7a02839e-1e07-44d4-b41e-638a1615c786	warn	omission	dictated finding not represented: Ankle mortise is preserved on the provided views.
 7a837822-a72a-4f21-8750-d36d87d3fdbf	error	unsupported_term	term not present in template or dictation: chang
-8475ae7b-8d0b-4756-9772-b20b98459143	warn	omission	dictated finding not represented: Brain Parenchyma
 8475ae7b-8d0b-4756-9772-b20b98459143	warn	omission	dictated finding not represented: Ventricles / CSF Spaces
-8475ae7b-8d0b-4756-9772-b20b98459143	warn	omission	dictated finding not represented: Posterior Fossa
-8475ae7b-8d0b-4756-9772-b20b98459143	warn	omission	dictated finding not represented: Calvarium / Scalp
 856fb1a7-3dd5-49a1-bf6d-9ed2cc551ec9	error	unsupported_term	term not present in template or dictation: anteroinferior
 856fb1a7-3dd5-49a1-bf6d-9ed2cc551ec9	error	unsupported_term	term not present in template or dictation: head
 88f779c0-bcea-4f26-b8e0-9b718325eb4b	error	unsupported_term	term not present in template or dictation: suggestive

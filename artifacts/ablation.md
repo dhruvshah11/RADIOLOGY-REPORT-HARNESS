@@ -35,3 +35,37 @@
 | + conjunction splitting (rejected)             |   0.3750 |   0.3189 |  0.3198 |   0.5435 |   0.3516 |     0.5574 |   0.931 |
 | + trim detail in dictated summary (rejected)   |   0.3840 |   0.3279 |  0.3288 |   0.5493 |   0.3506 |     0.5847 |   0.926 |
 | + cost-sensitive impression chooser (no change) |   0.3742 |   0.3184 |  0.3193 |   0.5423 |   0.3506 |     0.5574 |   0.931 |
+
+## Phase 1 - measured against the first real leaderboard reading (RES 0.26141)
+
+The public score arrived after the table above was built. It landed 1.3 SE from the
+24-case held-out estimate (0.2318, SE 0.0312) - ordinary noise for that sample size,
+not a modelling error, but it exposed that the estimate was far too imprecise to steer
+by: resolving the 0.0066 spread between leaderboard ranks 1-4 needs n ~ 537.
+
+Everything below is therefore measured on all 636 training rows (SE 0.0061), with a
+gate of 2 SE = 0.012 to count as real.
+
+| variant | RES_word | length ratio | vs base | verdict |
+|---|---:|---:|---:|---|
+| baseline | 0.3743 | 0.953 | - | - |
+| + drop dictation layout headers | 0.3743 | 0.953 | +0.0003 | kept, below gate |
+| cover_threshold 0.05 -> 0.15 | 0.3748 | 0.953 | +0.0004 | rejected |
+| cover_threshold 0.05 -> 0.30 | 0.3819 | 0.970 | +0.0076 | rejected |
+| cover_threshold 0.05 -> 0.50 | 0.3963 | 1.002 | +0.0220 | rejected |
+| cover_threshold 0.05 -> 0.80 | 0.4103 | 1.022 | +0.0360 | rejected |
+| cover_threshold -> 1.01 (never drop a template sentence) | 0.4173 | 1.031 | +0.0430 | rejected |
+
+**Layout headers.** A dictation carrying its own section layout ("Findings", "Kidneys",
+"Peritoneum/Retroperitoneum") leaked 74 bare headers into the output across 15 of 636
+cases; the references keep 5.4% of them. The fix is correct and costs nothing, but 15
+cases cannot move a 636-case mean: the effect (0.0003) is a twentieth of the gate.
+Rare-error fixes cannot close an aggregate gap.
+
+**The length hypothesis, rejected.** Report length against the reference is U-shaped:
+cases inside a 0.9-1.1 ratio average RES 0.2933, those outside average 0.40-0.60, and
+307 of 636 sit outside. Forcing the ratio toward 1.0 by keeping more template text
+moved it 0.953 -> 1.031 and made RES monotonically *worse*, by 0.043. Length is a
+symptom of wrong content, not a cause of a poor score. Measured on 24 stage-2 cases the
+correlation looked strong (r = -0.504); on all 636 it is r = -0.054. This is exactly the
+result the small sample would have got wrong.

@@ -157,7 +157,29 @@ class DictationDoc:
         return self.findings + self.impression
 
 
-def _classify_boilerplate(sent: str) -> str | None:
+# A dictation that carries its own section layout ("Findings", "Kidneys",
+# "Peritoneum/Retroperitoneum") leaks those bare headers in as findings.  On the
+# training set 74 such segments appear and the reference keeps 4 of them (5.4%).
+_HEADER_VERB = re.compile(
+    r"\b(is|are|was|were|shows?|demonstrat\w*|seen|noted|identified|present|"
+    r"reveals?|appears?|measur\w*|no|without|there|with|within)\b", re.I)
+_HEADER_QUAL = re.compile(
+    r"^(mild|moderate|severe|small|large|minimal|trace|focal|diffuse|multiple|normal|"
+    r"prominent|stable|chronic|acute|mildly|grossly|few|early|advanced)\b", re.I)
+
+
+def is_layout_header(sent: str) -> bool:
+    """A bare section label from the dictation's own layout, not a finding."""
+    t = sent.strip().rstrip(".").strip()
+    words = t.split()
+    if not 1 <= len(words) <= 4:
+        return False
+    if _HEADER_VERB.search(t) or _HEADER_QUAL.match(t) or re.search(r"\d", t):
+        return False
+    return t.isupper() or t == t.title() or t.endswith(":")
+
+
+def _classify_boilerplate(sent: str, drop_layout_headers: bool = True) -> str | None:
     s = sent.strip()
     if NONE_PAT.match(s):
         return "preamble"
@@ -168,6 +190,8 @@ def _classify_boilerplate(sent: str) -> str | None:
     if TECHNIQUE_PAT.search(s):
         return "preamble"
     if ALLCAPS_HEADER.match(s) and not LEVEL_RE.search(s):
+        return "preamble"
+    if drop_layout_headers and is_layout_header(s) and not LEVEL_RE.search(s):
         return "preamble"
     if MODALITY_HEADER.match(s) and not POS_HINT.search(s) and not NEG_ANY.search(s):
         return "preamble"
@@ -269,6 +293,7 @@ def segment_dictation(
     summary_threshold: float = 0.34,
     summary_max_misses: int = 3,
     summary_after_cues: bool = False,
+    drop_layout_headers: bool = True,
 ) -> DictationDoc:
     text = clean_ws(raw or "")
     if normalize:
@@ -286,7 +311,7 @@ def segment_dictation(
         s = squash(s)
         if not s:
             continue
-        kind = _classify_boilerplate(s)
+        kind = _classify_boilerplate(s, drop_layout_headers)
         if kind == "preamble":
             pre.append(Segment(text=s, kind="preamble"))
             continue
