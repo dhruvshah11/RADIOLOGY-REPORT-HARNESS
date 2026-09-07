@@ -168,6 +168,13 @@ _HEADER_QUAL = re.compile(
     r"prominent|stable|chronic|acute|mildly|grossly|few|early|advanced)\b", re.I)
 
 
+# A bare state word ("Preserved.", "Unremarkable.", "Intact.") is a template-style
+# field value, not a section label, and must never be mistaken for one.
+_STATE_WORD = re.compile(
+    r"^(intact|preserved|maintained|unremarkable|normal|patent|negative|clear|none|"
+    r"stable|symmetric|postoperative|nil|absent|adequate|satisfactory)$", re.I)
+
+
 def is_layout_header(sent: str) -> bool:
     """A bare section label from the dictation's own layout, not a finding."""
     t = sent.strip().rstrip(".").strip()
@@ -175,6 +182,8 @@ def is_layout_header(sent: str) -> bool:
     if not 1 <= len(words) <= 4:
         return False
     if _HEADER_VERB.search(t) or _HEADER_QUAL.match(t) or re.search(r"\d", t):
+        return False
+    if any(_STATE_WORD.match(w.strip(",;:/")) for w in words):
         return False
     return t.isupper() or t == t.title() or t.endswith(":")
 

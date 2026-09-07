@@ -11,3 +11,6 @@ artifacts/sweep_last.json
 
 # Stage-2 work packets embed the competition dictations/templates (not redistributed)
 artifacts/llm_packet*.json
+
+# tuning run in progress; committed when the run completes
+artifacts/tune_phase3.log
