@@ -145,8 +145,17 @@ the wrong sentences. It also repairs dictation typos the corpus spell-checker go
   edits, and the closest analogue to an "edit score".
 * `content recall / precision` — content-word overlap with the reference.
 
-The pipeline is bit-identical across processes and hash seeds
-(`python scripts/check_determinism.py`).
+Stage 1 is bit-identical across processes and hash seeds
+(`python scripts/check_determinism.py`, which exercises the deterministic pipeline only).
+
+**What is and is not deterministic.** Stage 1 generates the same bytes on every run. Stage 2
+is a language-model call and is *not* reproducible in that sense — ask it twice and the wording
+will differ. What is reproducible is the **submission**: the stage-2 outputs are cached in
+`artifacts/llm_refined_test.json`, so regenerating `submission.csv` from this repository, or by
+running the notebook top to bottom, yields the same file byte-for-byte with no network access
+and no API key. Determinism here is a property of reproducing the CSV, not of generating the
+refinements. Re-running the live stage with a key (`RRH_RUN_LLM=1`) overwrites the cache and
+will produce a different — not necessarily worse — submission.
 
 Field routing is evaluated separately against the field each finding occupies in the reference
 report: **85.8% accuracy** (5-fold, statistics re-mined per fold).
