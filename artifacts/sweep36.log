@@ -1,0 +1,8 @@
+word=0.3748 char=0.3185 raw=0.3193 find=0.3514 imp=0.5573 fx=0.413 cRec=0.931 | {"use_impression_chooser": true, "chooser_depth": 1} [165s]
+word=0.3748 char=0.3185 raw=0.3193 find=0.3514 imp=0.5573 fx=0.413 cRec=0.931 | {"use_impression_chooser": true, "chooser_depth": 2} [165s]
+word=0.3748 char=0.3185 raw=0.3193 find=0.3514 imp=0.5573 fx=0.413 cRec=0.931 | {"use_impression_chooser": true, "chooser_depth": 3} [162s]
+
+### TOP 5 ###
+  0.3748  {"use_impression_chooser": true, "chooser_depth": 1}
+  0.3748  {"use_impression_chooser": true, "chooser_depth": 2}
+  0.3748  {"use_impression_chooser": true, "chooser_depth": 3}

@@ -1,0 +1,13 @@
+word=0.4023 char=0.3414 raw=0.3423 find=0.3747 imp=0.6046 fx=0.406 cRec=0.930 | {"recover_summary": true, "summary_recover_threshold": 0.4} [11s]
+word=0.4113 char=0.3495 raw=0.3504 find=0.3875 imp=0.6046 fx=0.403 cRec=0.932 | {"recover_summary": true, "summary_recover_threshold": 0.6} [11s]
+word=0.4263 char=0.3636 raw=0.3645 find=0.4077 imp=0.6046 fx=0.400 cRec=0.935 | {"recover_summary": true, "summary_recover_threshold": 0.8} [11s]
+word=0.3920 char=0.3329 raw=0.3337 find=0.3628 imp=0.6046 fx=0.409 cRec=0.922 | {"recover_summary": false, "summary_recover_threshold": 0.4} [10s]
+word=0.3920 char=0.3329 raw=0.3337 find=0.3628 imp=0.6046 fx=0.409 cRec=0.922 | {"recover_summary": false, "summary_recover_threshold": 0.6} [9s]
+word=0.3920 char=0.3329 raw=0.3337 find=0.3628 imp=0.6046 fx=0.409 cRec=0.922 | {"recover_summary": false, "summary_recover_threshold": 0.8} [10s]
+
+### TOP 5 ###
+  0.3920  {"recover_summary": false, "summary_recover_threshold": 0.4}
+  0.3920  {"recover_summary": false, "summary_recover_threshold": 0.6}
+  0.3920  {"recover_summary": false, "summary_recover_threshold": 0.8}
+  0.4023  {"recover_summary": true, "summary_recover_threshold": 0.4}
+  0.4113  {"recover_summary": true, "summary_recover_threshold": 0.6}

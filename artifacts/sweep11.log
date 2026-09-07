@@ -1,0 +1,10 @@
+word=0.4000 char=0.3407 raw=0.3416 find=0.3745 imp=0.6061 fx=0.402 cRec=0.923 | {"findings_cap": 1} [11s]
+word=0.4005 char=0.3399 raw=0.3408 find=0.3745 imp=0.6229 fx=0.402 cRec=0.923 | {"findings_cap": 2} [10s]
+word=0.4044 char=0.3426 raw=0.3435 find=0.3745 imp=0.6531 fx=0.402 cRec=0.923 | {"findings_cap": 3} [9s]
+word=0.4079 char=0.3455 raw=0.3465 find=0.3745 imp=0.6725 fx=0.402 cRec=0.923 | {"findings_cap": 4} [9s]
+
+### TOP 5 ###
+  0.4000  {"findings_cap": 1}
+  0.4005  {"findings_cap": 2}
+  0.4044  {"findings_cap": 3}
+  0.4079  {"findings_cap": 4}

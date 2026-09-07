@@ -1,0 +1,6 @@
+wrote /home/user/RADIOLOGY-REPORT-HARNESS/scripts/../submission.csv: 132 rows
+validation issues: {"omission": 4}
+  omission           dictated finding not represented: Surgical clips are seen in the gallbladder fossa.
+  omission           dictated finding not represented: The airway appears normal.
+  omission           dictated finding not represented: The visualized lung apices are clear.
+  omission           dictated finding not represented: Visualized sacroiliac joints are maintained.

@@ -1,0 +1,15 @@
+word=0.3931 char=0.3339 raw=0.3347 find=0.3634 imp=0.6093 fx=0.411 cRec=0.922 | {"dedupe_threshold": 0.0, "rank_impression_by_severity": true} [11s]
+word=0.3921 char=0.3328 raw=0.3336 find=0.3634 imp=0.6043 fx=0.411 cRec=0.922 | {"dedupe_threshold": 0.0, "rank_impression_by_severity": false} [10s]
+word=0.3916 char=0.3324 raw=0.3333 find=0.3611 imp=0.6093 fx=0.412 cRec=0.921 | {"dedupe_threshold": 0.7, "rank_impression_by_severity": true} [11s]
+word=0.3906 char=0.3314 raw=0.3323 find=0.3611 imp=0.6043 fx=0.412 cRec=0.921 | {"dedupe_threshold": 0.7, "rank_impression_by_severity": false} [10s]
+word=0.3921 char=0.3329 raw=0.3338 find=0.3618 imp=0.6093 fx=0.411 cRec=0.921 | {"dedupe_threshold": 0.85, "rank_impression_by_severity": true} [10s]
+word=0.3912 char=0.3319 raw=0.3328 find=0.3618 imp=0.6043 fx=0.411 cRec=0.921 | {"dedupe_threshold": 0.85, "rank_impression_by_severity": false} [10s]
+word=0.3929 char=0.3335 raw=0.3343 find=0.3627 imp=0.6093 fx=0.411 cRec=0.921 | {"dedupe_threshold": 0.95, "rank_impression_by_severity": true} [10s]
+word=0.3919 char=0.3324 raw=0.3333 find=0.3627 imp=0.6043 fx=0.411 cRec=0.921 | {"dedupe_threshold": 0.95, "rank_impression_by_severity": false} [10s]
+
+### TOP 5 ###
+  0.3906  {"dedupe_threshold": 0.7, "rank_impression_by_severity": false}
+  0.3912  {"dedupe_threshold": 0.85, "rank_impression_by_severity": false}
+  0.3916  {"dedupe_threshold": 0.7, "rank_impression_by_severity": true}
+  0.3919  {"dedupe_threshold": 0.95, "rank_impression_by_severity": false}
+  0.3921  {"dedupe_threshold": 0.0, "rank_impression_by_severity": false}

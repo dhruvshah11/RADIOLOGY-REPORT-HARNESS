@@ -1,0 +1,25 @@
+word=0.3917 char=0.3340 raw=0.3348 find=0.3636 imp=0.5879 fx=0.409 cRec=0.922 | {"cover_threshold": 0.05, "findings_cap": 1, "abnormal_first": true} [11s]
+word=0.3999 char=0.3410 raw=0.3420 find=0.3753 imp=0.5879 fx=0.403 cRec=0.922 | {"cover_threshold": 0.05, "findings_cap": 1, "abnormal_first": false} [9s]
+word=0.3925 char=0.3334 raw=0.3342 find=0.3636 imp=0.6047 fx=0.409 cRec=0.922 | {"cover_threshold": 0.05, "findings_cap": 2, "abnormal_first": true} [9s]
+word=0.4008 char=0.3405 raw=0.3414 find=0.3753 imp=0.6047 fx=0.403 cRec=0.922 | {"cover_threshold": 0.05, "findings_cap": 2, "abnormal_first": false} [9s]
+word=0.3959 char=0.3358 raw=0.3366 find=0.3636 imp=0.6330 fx=0.409 cRec=0.922 | {"cover_threshold": 0.05, "findings_cap": 3, "abnormal_first": true} [9s]
+word=0.4044 char=0.3429 raw=0.3438 find=0.3753 imp=0.6330 fx=0.403 cRec=0.922 | {"cover_threshold": 0.05, "findings_cap": 3, "abnormal_first": false} [9s]
+word=0.3918 char=0.3340 raw=0.3349 find=0.3638 imp=0.5879 fx=0.409 cRec=0.922 | {"cover_threshold": 0.12, "findings_cap": 1, "abnormal_first": true} [9s]
+word=0.4000 char=0.3411 raw=0.3420 find=0.3755 imp=0.5879 fx=0.403 cRec=0.922 | {"cover_threshold": 0.12, "findings_cap": 1, "abnormal_first": false} [9s]
+word=0.3926 char=0.3334 raw=0.3342 find=0.3638 imp=0.6047 fx=0.409 cRec=0.922 | {"cover_threshold": 0.12, "findings_cap": 2, "abnormal_first": true} [9s]
+word=0.4010 char=0.3405 raw=0.3415 find=0.3755 imp=0.6047 fx=0.403 cRec=0.922 | {"cover_threshold": 0.12, "findings_cap": 2, "abnormal_first": false} [9s]
+word=0.3960 char=0.3358 raw=0.3366 find=0.3638 imp=0.6330 fx=0.409 cRec=0.922 | {"cover_threshold": 0.12, "findings_cap": 3, "abnormal_first": true} [10s]
+word=0.4045 char=0.3429 raw=0.3439 find=0.3755 imp=0.6330 fx=0.403 cRec=0.922 | {"cover_threshold": 0.12, "findings_cap": 3, "abnormal_first": false} [10s]
+word=0.3966 char=0.3382 raw=0.3391 find=0.3700 imp=0.5879 fx=0.406 cRec=0.925 | {"cover_threshold": 0.25, "findings_cap": 1, "abnormal_first": true} [10s]
+word=0.4049 char=0.3454 raw=0.3464 find=0.3817 imp=0.5879 fx=0.400 cRec=0.925 | {"cover_threshold": 0.25, "findings_cap": 1, "abnormal_first": false} [9s]
+word=0.3975 char=0.3377 raw=0.3384 find=0.3700 imp=0.6047 fx=0.406 cRec=0.925 | {"cover_threshold": 0.25, "findings_cap": 2, "abnormal_first": true} [9s]
+word=0.4058 char=0.3449 raw=0.3458 find=0.3817 imp=0.6047 fx=0.400 cRec=0.925 | {"cover_threshold": 0.25, "findings_cap": 2, "abnormal_first": false} [10s]
+word=0.4009 char=0.3401 raw=0.3408 find=0.3700 imp=0.6330 fx=0.406 cRec=0.925 | {"cover_threshold": 0.25, "findings_cap": 3, "abnormal_first": true} [9s]
+word=0.4093 char=0.3473 raw=0.3482 find=0.3817 imp=0.6330 fx=0.400 cRec=0.925 | {"cover_threshold": 0.25, "findings_cap": 3, "abnormal_first": false} [9s]
+
+### TOP 5 ###
+  0.3917  {"cover_threshold": 0.05, "findings_cap": 1, "abnormal_first": true}
+  0.3918  {"cover_threshold": 0.12, "findings_cap": 1, "abnormal_first": true}
+  0.3925  {"cover_threshold": 0.05, "findings_cap": 2, "abnormal_first": true}
+  0.3926  {"cover_threshold": 0.12, "findings_cap": 2, "abnormal_first": true}
+  0.3959  {"cover_threshold": 0.05, "findings_cap": 3, "abnormal_first": true}

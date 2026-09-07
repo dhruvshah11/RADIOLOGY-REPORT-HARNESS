@@ -1,0 +1,23 @@
+word=0.4129 char=0.3498 raw=0.3507 find=0.3893 imp=0.6275 fx=0.392 cRec=0.923 | {"drop_negative_impression": true, "trim_detail": true, "append_template_impression": true, "number_impression": true} [10s]
+word=0.4180 char=0.3525 raw=0.3539 find=0.3893 imp=0.6355 fx=0.392 cRec=0.923 | {"drop_negative_impression": true, "trim_detail": true, "append_template_impression": true, "number_impression": false} [9s]
+word=0.4271 char=0.3615 raw=0.3624 find=0.3893 imp=0.6638 fx=0.392 cRec=0.912 | {"drop_negative_impression": true, "trim_detail": true, "append_template_impression": false, "number_impression": true} [9s]
+word=0.4279 char=0.3626 raw=0.3636 find=0.3893 imp=0.6646 fx=0.392 cRec=0.912 | {"drop_negative_impression": true, "trim_detail": true, "append_template_impression": false, "number_impression": false} [9s]
+word=0.4196 char=0.3556 raw=0.3566 find=0.3893 imp=0.6613 fx=0.392 cRec=0.923 | {"drop_negative_impression": true, "trim_detail": false, "append_template_impression": true, "number_impression": true} [9s]
+word=0.4239 char=0.3580 raw=0.3595 find=0.3893 imp=0.6671 fx=0.392 cRec=0.923 | {"drop_negative_impression": true, "trim_detail": false, "append_template_impression": true, "number_impression": false} [9s]
+word=0.4318 char=0.3648 raw=0.3657 find=0.3893 imp=0.6873 fx=0.392 cRec=0.912 | {"drop_negative_impression": true, "trim_detail": false, "append_template_impression": false, "number_impression": true} [9s]
+word=0.4321 char=0.3656 raw=0.3666 find=0.3893 imp=0.6861 fx=0.392 cRec=0.912 | {"drop_negative_impression": true, "trim_detail": false, "append_template_impression": false, "number_impression": false} [9s]
+word=0.4187 char=0.3526 raw=0.3537 find=0.3893 imp=0.7093 fx=0.392 cRec=0.934 | {"drop_negative_impression": false, "trim_detail": true, "append_template_impression": true, "number_impression": true} [10s]
+word=0.4195 char=0.3536 raw=0.3554 find=0.3893 imp=0.6882 fx=0.392 cRec=0.934 | {"drop_negative_impression": false, "trim_detail": true, "append_template_impression": true, "number_impression": false} [10s]
+word=0.4275 char=0.3605 raw=0.3615 find=0.3893 imp=0.7147 fx=0.392 cRec=0.921 | {"drop_negative_impression": false, "trim_detail": true, "append_template_impression": false, "number_impression": true} [10s]
+word=0.4253 char=0.3607 raw=0.3621 find=0.3893 imp=0.6954 fx=0.392 cRec=0.921 | {"drop_negative_impression": false, "trim_detail": true, "append_template_impression": false, "number_impression": false} [10s]
+word=0.4223 char=0.3557 raw=0.3568 find=0.3893 imp=0.7290 fx=0.392 cRec=0.934 | {"drop_negative_impression": false, "trim_detail": false, "append_template_impression": true, "number_impression": true} [10s]
+word=0.4228 char=0.3567 raw=0.3585 find=0.3893 imp=0.7065 fx=0.392 cRec=0.934 | {"drop_negative_impression": false, "trim_detail": false, "append_template_impression": true, "number_impression": false} [10s]
+word=0.4299 char=0.3621 raw=0.3632 find=0.3893 imp=0.7283 fx=0.392 cRec=0.921 | {"drop_negative_impression": false, "trim_detail": false, "append_template_impression": false, "number_impression": true} [10s]
+word=0.4276 char=0.3622 raw=0.3636 find=0.3893 imp=0.7084 fx=0.392 cRec=0.921 | {"drop_negative_impression": false, "trim_detail": false, "append_template_impression": false, "number_impression": false} [10s]
+
+### TOP 5 ###
+  0.4129  {"drop_negative_impression": true, "trim_detail": true, "append_template_impression": true, "number_impression": true}
+  0.4180  {"drop_negative_impression": true, "trim_detail": true, "append_template_impression": true, "number_impression": false}
+  0.4187  {"drop_negative_impression": false, "trim_detail": true, "append_template_impression": true, "number_impression": true}
+  0.4195  {"drop_negative_impression": false, "trim_detail": true, "append_template_impression": true, "number_impression": false}
+  0.4196  {"drop_negative_impression": true, "trim_detail": false, "append_template_impression": true, "number_impression": true}

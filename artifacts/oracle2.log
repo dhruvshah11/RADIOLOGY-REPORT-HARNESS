@@ -1,0 +1,4 @@
+pipeline            : n=636  RES_word=0.3748  RES_char=0.3185  RES_raw=0.3193  RES_sent=0.5439  find=0.3514  imp=0.5573  labelF1=0.9958  fieldExact=0.4127  fieldRES=0.3727  cRec=0.931  cPrec=0.925
+oracle field routing: n=636  RES_word=0.3398  RES_char=0.2889  RES_raw=0.2891  RES_sent=0.4947  find=0.3055  imp=0.5575  labelF1=0.9958  fieldExact=0.4716  fieldRES=0.2602  cRec=0.905  cPrec=0.932
+
+impression  current=0.5573  oracle-choice=0.4613   best variant counts={'template': 162, 'summary': 226, 'findings': 248}

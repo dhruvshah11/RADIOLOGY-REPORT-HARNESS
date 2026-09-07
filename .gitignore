@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Competition data: download from Kaggle into data/ (not redistributed here)
+data/*.csv
+
+# Build artifacts
+artifacts/fold_models*.pkl
+artifacts/sweep_last.json
+
+# Stage-2 work packets embed the competition dictations/templates (not redistributed)
+artifacts/llm_packet*.json

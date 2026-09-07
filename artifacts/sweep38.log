@@ -1,0 +1,13 @@
+word=0.3756 char=0.3195 raw=0.3203 find=0.3523 imp=0.5573 fx=0.413 cRec=0.931 | {"mine_threshold": 0.55, "trim_summary_detail": false} [35s]
+word=0.3854 char=0.3290 raw=0.3299 find=0.3523 imp=0.5845 fx=0.413 cRec=0.926 | {"mine_threshold": 0.55, "trim_summary_detail": true} [13s]
+word=0.3750 char=0.3189 raw=0.3198 find=0.3516 imp=0.5574 fx=0.413 cRec=0.931 | {"mine_threshold": 0.6, "trim_summary_detail": false} [24s]
+word=0.3848 char=0.3285 raw=0.3294 find=0.3516 imp=0.5847 fx=0.413 cRec=0.926 | {"mine_threshold": 0.6, "trim_summary_detail": true} [13s]
+word=0.3765 char=0.3202 raw=0.3211 find=0.3534 imp=0.5574 fx=0.413 cRec=0.931 | {"mine_threshold": 0.65, "trim_summary_detail": false} [25s]
+word=0.3863 char=0.3297 raw=0.3306 find=0.3534 imp=0.5847 fx=0.413 cRec=0.926 | {"mine_threshold": 0.65, "trim_summary_detail": true} [14s]
+
+### TOP 5 ###
+  0.3750  {"mine_threshold": 0.6, "trim_summary_detail": false}
+  0.3756  {"mine_threshold": 0.55, "trim_summary_detail": false}
+  0.3765  {"mine_threshold": 0.65, "trim_summary_detail": false}
+  0.3848  {"mine_threshold": 0.6, "trim_summary_detail": true}
+  0.3854  {"mine_threshold": 0.55, "trim_summary_detail": true}

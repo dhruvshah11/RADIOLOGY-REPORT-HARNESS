@@ -1,0 +1,22 @@
+word=0.3908 char=0.3317 raw=0.3325 find=0.3612 imp=0.6045 fx=0.412 cRec=0.921 | {"w_continuity": 0.0, "w_backward": 0.0} [12s]
+word=0.3897 char=0.3307 raw=0.3315 find=0.3602 imp=0.6045 fx=0.412 cRec=0.921 | {"w_continuity": 0.0, "w_backward": 0.5} [10s]
+word=0.3889 char=0.3297 raw=0.3305 find=0.3597 imp=0.6045 fx=0.412 cRec=0.921 | {"w_continuity": 0.0, "w_backward": 1.0} [10s]
+word=0.3903 char=0.3315 raw=0.3323 find=0.3609 imp=0.6045 fx=0.413 cRec=0.921 | {"w_continuity": 0.3, "w_backward": 0.0} [10s]
+word=0.3890 char=0.3304 raw=0.3312 find=0.3598 imp=0.6045 fx=0.413 cRec=0.921 | {"w_continuity": 0.3, "w_backward": 0.5} [10s]
+word=0.3883 char=0.3294 raw=0.3302 find=0.3590 imp=0.6045 fx=0.414 cRec=0.921 | {"w_continuity": 0.3, "w_backward": 1.0} [10s]
+word=0.3908 char=0.3320 raw=0.3327 find=0.3612 imp=0.6045 fx=0.415 cRec=0.921 | {"w_continuity": 0.6, "w_backward": 0.0} [10s]
+word=0.3893 char=0.3306 raw=0.3313 find=0.3596 imp=0.6045 fx=0.415 cRec=0.922 | {"w_continuity": 0.6, "w_backward": 0.5} [10s]
+word=0.3900 char=0.3309 raw=0.3316 find=0.3603 imp=0.6045 fx=0.415 cRec=0.922 | {"w_continuity": 0.6, "w_backward": 1.0} [10s]
+word=0.3911 char=0.3318 raw=0.3326 find=0.3620 imp=0.6047 fx=0.416 cRec=0.922 | {"w_continuity": 1.0, "w_backward": 0.0} [11s]
+word=0.3918 char=0.3322 raw=0.3329 find=0.3629 imp=0.6047 fx=0.415 cRec=0.922 | {"w_continuity": 1.0, "w_backward": 0.5} [11s]
+word=0.3934 char=0.3334 raw=0.3342 find=0.3654 imp=0.6047 fx=0.415 cRec=0.922 | {"w_continuity": 1.0, "w_backward": 1.0} [10s]
+word=0.3976 char=0.3375 raw=0.3383 find=0.3707 imp=0.6045 fx=0.415 cRec=0.922 | {"w_continuity": 1.5, "w_backward": 0.0} [10s]
+word=0.3999 char=0.3393 raw=0.3401 find=0.3745 imp=0.6045 fx=0.414 cRec=0.922 | {"w_continuity": 1.5, "w_backward": 0.5} [10s]
+word=0.4033 char=0.3424 raw=0.3432 find=0.3793 imp=0.6045 fx=0.413 cRec=0.922 | {"w_continuity": 1.5, "w_backward": 1.0} [10s]
+
+### TOP 5 ###
+  0.3883  {"w_continuity": 0.3, "w_backward": 1.0}
+  0.3889  {"w_continuity": 0.0, "w_backward": 1.0}
+  0.3890  {"w_continuity": 0.3, "w_backward": 0.5}
+  0.3893  {"w_continuity": 0.6, "w_backward": 0.5}
+  0.3897  {"w_continuity": 0.0, "w_backward": 0.5}
