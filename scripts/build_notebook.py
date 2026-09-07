@@ -49,7 +49,7 @@ report by *minimally editing* the supplied normal template. The leaderboard
 metric (RES, lower is better) rewards template-edit fidelity, not free-form
 report writing.
 
-**Approach - structured generation (Approach B/D), fully deterministic.**
+**Approach - structured generation (Approach B/D), in two stages.**
 
 ```
 dictation
@@ -86,9 +86,17 @@ is present. Its 132 outputs are cached in Section 6 as `refined_reports.json`,
 so the notebook reproduces `submission.csv` byte-for-byte offline; supplying a
 key re-runs the stage instead of reading the cache.
 
-Re-running this notebook top to bottom regenerates `submission.csv` exactly -
-one instruction set applied to every case, no per-case manual editing anywhere
-in the pipeline.
+**What is and is not deterministic.** Stage 1 generates the same bytes on every
+run (`check_determinism.py` verifies this across hash seeds). Stage 2 is a
+language-model call and is not reproducible in that sense. What *is* reproducible
+is the submission: the stage-2 outputs are cached in Section 6.2, so re-running
+this notebook top to bottom regenerates `submission.csv` byte-for-byte with no
+network access and no API key. Determinism here is a property of reproducing the
+CSV, not of generating the refinements - running the live stage under
+`RRH_RUN_LLM=1` overwrites the cache and yields a different submission.
+
+One instruction set is applied to every case; there is no per-case manual editing
+anywhere in the pipeline.
 """
 
 SETUP = """import os, sys, json, csv, subprocess
