@@ -28,7 +28,7 @@
   "split_margin": -0.3,
   "style_threshold": 0.0,
   "summary_after_cues": false,
-  "summary_cap": 8,
+  "summary_cap": 0,
   "summary_max_misses": 2,
   "summary_recover_threshold": 0.6,
   "summary_threshold": 0.23,
