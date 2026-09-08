@@ -318,6 +318,53 @@ uniformly to all 132 cases. There is **no per-case manual editing anywhere** —
 its own rule, and the stage-2 outputs are cached (`artifacts/llm_refined_test.json`) so the CSV
 regenerates offline with no network access and no API key.
 
+## Scripted stage 2 (the tuning loop)
+
+Stage 2 was originally applied by hand, once, which made it impossible to *measure*: a
+reliable read needs ~537 refined cases against references, and hand-refining that many is not
+feasible. `scripts/refine_llm.py` turns it into a scripted, measurable component so the
+instruction set can be tuned against real feedback rather than intuition.
+
+Two things it does that the hand pass could not:
+
+* **Few-shot on the same template.** 117 of the 132 test cases share a template with the
+  training set (median 19 examples each; `FewShotIndex.coverage`). Each request carries the
+  most dictation-similar worked examples of that same template - dictation paired with the real
+  finished report. The measured residual, once routing and formatting are correct, is
+  *phrasing*, and worked examples are the most direct signal for it. A case is never shown its
+  own reference, so training scores stay honest.
+* **N-best with medoid selection.** `--n-best 3` samples three refinements and keeps the most
+  central by word-level edit distance - variance reduction that needs no reference.
+
+```bash
+export ANTHROPIC_API_KEY=...          # never committed; the notebook reads it from the env
+
+# 1. plumbing check, no key needed
+python scripts/refine_llm.py --split train --limit 8 --out artifacts/mock.json --mock
+
+# 2. refine a training slice and measure it
+python scripts/refine_llm.py --split train --limit 150 --out artifacts/r_v1.json --prompt v1
+python scripts/prompt_ab.py artifacts/r_v1.json
+
+# 3. edit PROMPTS["v2"] in scripts/refine_llm.py, re-run, and A/B the two
+python scripts/refine_llm.py --split train --limit 150 --out artifacts/r_v2.json --prompt v2
+python scripts/prompt_ab.py artifacts/r_v1.json artifacts/r_v2.json
+
+# 4. once a prompt wins by more than 2 SE, run it over the test set
+python scripts/refine_llm.py --split test --out artifacts/llm_refined_test.json --prompt v2
+python scripts/apply_overlay.py
+```
+
+`prompt_ab.py` reports a **paired** A/B - the same cases on both sides - which is far tighter
+than either absolute score, and it prints the standard error next to every number. Switch
+prompts only when the difference clears 2 SE; the sampling noise on a 24-case read is 0.031,
+which is five times the spread between leaderboard ranks 1 and 4 and is what sent three
+earlier hypotheses the wrong way. It also runs the validator over the batch, so an
+instruction set that starts inventing content shows up immediately.
+
+Both runners are resumable: re-running with the same `--out` skips cases already present, so
+an interrupted run or a rate-limit wall costs nothing.
+
 ## Kaggle notebook
 
 `notebooks/radiology-reporting-harness.ipynb` is generated from `src/rrh/` by
