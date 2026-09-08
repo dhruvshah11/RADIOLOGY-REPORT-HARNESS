@@ -69,3 +69,24 @@ moved it 0.953 -> 1.031 and made RES monotonically *worse*, by 0.043. Length is 
 symptom of wrong content, not a cause of a poor score. Measured on 24 stage-2 cases the
 correlation looked strong (r = -0.504); on all 636 it is r = -0.054. This is exactly the
 result the small sample would have got wrong.
+
+## Output-format hypotheses (measured on all 636)
+
+| variant | RES_word | RES_char | verdict |
+|---|---:|---:|---|
+| UPPERCASE field labels (current) | 0.3744 | **0.3181** | kept |
+| preserve the template's label casing | 0.3744 | 0.3233 | rejected |
+
+References keep the template's exact label casing 90.6% of the time, which reads
+like an argument for preserving it - but 90.3% of template labels are already
+uppercase, so that statistic mostly measures uppercase staying uppercase. Of the
+~451 mixed-case template labels the references uppercase 428 (95%). The A/B
+confirms it: preserving the template's casing costs 0.0052 on the character
+metric and nothing on the word metric.
+
+Report structure needs no change either. Reference and submitted reports agree on
+every structural feature measured: both open with "FINDINGS:" in 100% of cases,
+neither ends in trailing whitespace, both put exactly one blank line before
+IMPRESSION, and the blank-line distributions through the findings body have the
+same shape. 53 of 636 references end with a trailing newline; adding one
+everywhere would match 8% of cases and break 92%.

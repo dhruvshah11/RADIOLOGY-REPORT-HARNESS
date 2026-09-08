@@ -62,6 +62,7 @@ class Config:
     summary_max_misses: int = 3
     summary_after_cues: bool = False
     drop_layout_headers: bool = True
+    preserve_label_case: bool = False
     recover_summary: bool = True
     summary_recover_threshold: float = 0.6
     # impression
@@ -314,16 +315,17 @@ class ReportGenerator:
                     prev_order = field_order.get(label, prev_order)
                 ordered_findings.append(clause)
 
+        disp = (lambda f: f.label_raw) if cfg.preserve_label_case else (lambda f: f.label)
         field_texts: list[tuple[str, str]] = []
         for f in tmpl.fields:
             if f.is_free:
                 field_texts.append(("", resolve_placeholders(f.text, laterality, region)))
                 continue
             if f.label == "OTHER FINDINGS":
-                field_texts.append((f.label, ""))
+                field_texts.append((disp(f), ""))
                 continue
             body = edit_field(f.text, routed.get(f.label, []), cfg)
-            field_texts.append((f.label, resolve_placeholders(body, laterality, region)))
+            field_texts.append((disp(f), resolve_placeholders(body, laterality, region)))
 
         summary_items = [s.text for s in doc.impression]
         if force_impression is not None:
